@@ -1,4 +1,5 @@
 <p>planet-list works!</p>
 <ul>
-  <li *ngFor="let planet of planetList$ | async">{{planet.name}}</li>
+  <li *ngFor="let planet of planetsList$ | async">{{planet.name}}</li>
 </ul>
+<button (click)="loadRest()">Load rest</button>

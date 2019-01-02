@@ -15,7 +15,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 @NgModule({
   imports: [
     BrowserModule,
-    StoreModule.forRoot({ planetData: planetsReducer }),
+    StoreModule.forRoot({ planetsData: planetsReducer }),
     EffectsModule.forRoot([PlanetsEffects]),
     AppRoutingModule,
     HttpClientModule

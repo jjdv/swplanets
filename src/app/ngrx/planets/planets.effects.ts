@@ -4,7 +4,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
-import { ActionTypes, SaveIniData, ReportError } from './planets.actions'
+import { ActionTypes, SaveIniData, SaveAllData, ReportError } from './planets.actions'
 import { PlanetsService } from '../../services/planets/planets.service';
 
  
@@ -17,7 +17,7 @@ export class PlanetsEffects {
         return this.planetsService.getPlanets$(targetState).pipe(
             map(reply => typeof reply !== 'string'
                 // If successful (reply as apiData object), dispatch success action with result
-                ? new SaveIniData(reply)
+                ? ( targetState === 'iniData' ? new SaveIniData(reply) : new SaveAllData(reply) )
                 // If error (reply as error string message), dispatch success action with result
                 : new ReportError('networkError'))
         )
@@ -27,5 +27,11 @@ export class PlanetsEffects {
     initialize$: Observable<Action> = this.actions$.pipe(
         ofType(ActionTypes.Initialize),
         switchMap(action => this.getPlanetsAction$('iniData'))
+    );
+
+    @Effect()
+    getAll$: Observable<Action> = this.actions$.pipe(
+        ofType(ActionTypes.GetAll),
+        switchMap(action => this.getPlanetsAction$('allData'))
     );
 }

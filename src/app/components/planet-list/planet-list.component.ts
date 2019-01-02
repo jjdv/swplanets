@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 
-import { Initialize } from '../../ngrx/planets/planets.actions'
+import { Initialize, GetAll } from '../../ngrx/planets/planets.actions'
 import { PlanetsData, planetsT } from 'src/app/services/planets/planets.config';
 
 @Component({
@@ -12,13 +12,17 @@ import { PlanetsData, planetsT } from 'src/app/services/planets/planets.config';
   styleUrls: ['./planet-list.component.scss']
 })
 export class PlanetListComponent implements OnInit {
-  planetList$: Observable<planetsT>;
+  planetsList$: Observable<planetsT>;
 
   constructor(private store: Store<{ planetData: PlanetsData }>) {}
 
   ngOnInit() {
+    this.planetsList$ = this.store.pipe( select('planetsData'), map(planetsData => planetsData.planets) );
     this.store.dispatch(new Initialize())
-    this.planetList$ = this.store.pipe( select('planetData'), map(planetData => planetData.planets) );
+  }
+
+  loadRest(): void {
+    this.store.dispatch(new GetAll())
   }
 
 }
