@@ -11,6 +11,10 @@ import { AppComponent } from './app.component';
 import { PlanetListComponent } from './components/planet-list/planet-list.component';
 import { PlanetDetailsComponent } from './components/planet-details/planet-details.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PlanetsTableComponent } from './components/planets-table/planets-table.component';
+import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { PlanetsDetailsTableComponent } from './components/planets-details-table/planets-details-table.component';
 
 @NgModule({
   imports: [
@@ -18,13 +22,19 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     StoreModule.forRoot({ planetsData: planetsReducer }),
     EffectsModule.forRoot([PlanetsEffects]),
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   declarations: [
     AppComponent,
     PlanetListComponent,
     PlanetDetailsComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    PlanetsTableComponent,
+    PlanetsDetailsTableComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
