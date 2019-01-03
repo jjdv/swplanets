@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {DemoMaterialModule} from './material-module';
 
 import { planetsReducer } from './ngrx/planets/planets.reducer';
 import { PlanetsEffects } from './ngrx/planets/planets.effects';
@@ -26,7 +28,10 @@ import { PlanetsDetailsTableComponent } from './components/planets-details-table
     BrowserAnimationsModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    FormsModule,
+    ReactiveFormsModule,
+    DemoMaterialModule
   ],
   declarations: [
     AppComponent,

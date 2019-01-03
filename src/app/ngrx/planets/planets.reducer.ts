@@ -1,5 +1,3 @@
-import { Action } from '@ngrx/store';
-
 import { PlanetsData, PlanetsIniData } from '../../services/planets/planets.config'
 import { ActionTypes, ActionsUnion } from './planets.actions'
 

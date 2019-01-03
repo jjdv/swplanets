@@ -8,10 +8,9 @@ import { PlanetListService } from 'src/app/services/planet-list/planet-list.serv
   styleUrls: ['./planet-list.component.scss']
 })
 export class PlanetListComponent {
-  constructor(private planets: PlanetListService) { }
 
   togglePageSize() {
-    const newPageSize = this.planets.pageSize == 10 ? 20 : 10;
-    this.planets.setPageSize(newPageSize);
+    /*const newPageSize = this.planets.pageSize == 10 ? 20 : 10;
+    this.planets.setPageSize(newPageSize);*/
   }
 }

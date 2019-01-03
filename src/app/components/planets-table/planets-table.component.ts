@@ -1,21 +1,35 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort } from '@angular/material';
-import { PlanetsTableDataSource } from './planets-table-datasource';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+
+import { PlanetListService, PlanetListEl } from 'src/app/services/planet-list/planet-list.service';
 
 @Component({
-  selector: 'app-planets-table',
+  selector: 'planets-table',
   templateUrl: './planets-table.component.html',
   styleUrls: ['./planets-table.component.scss']
 })
 export class PlanetsTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  dataSource: PlanetsTableDataSource;
+  dataSource: MatTableDataSource<PlanetListEl>;
 
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name'];
+  displayedColumns = ['name', 'knownPropsNo' , 'residentsNo', 'filmsNo'];
+  
+  constructor(private planetListService: PlanetListService) {}
 
   ngOnInit() {
-    this.dataSource = new PlanetsTableDataSource(this.paginator, this.sort);
+    this.dataSource = new MatTableDataSource();
+    this.planetListService.list$.subscribe(list => {this.dataSource.data = list});
+    this.sort.sortChange.subscribe(() => this.paginator.firstPage());
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.filterPredicate = filterPlanet;
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue;
+    this.dataSource.paginator.firstPage();
   }
 }
+
+const filterPlanet = (planet: PlanetListEl, filterStr: string) => planet.name.toLowerCase().includes(filterStr.toLowerCase())
