@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { Planet, PlanetsData, planetsT } from 'src/app/services/planets/planets.config';
 import { PlanetListService } from 'src/app/services/planet-list/planet-list.service';
 
 @Component({

@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Initialize, GetAll } from '../../ngrx/planets/planets.actions'
 import { Store, select } from '@ngrx/store';
 
@@ -27,12 +27,6 @@ export class PlanetListService {
   private _pageNo: number = 0;
   private _planetsList: PlanetList = [];
 
-  private set(planetsDataList: Planet[]): void {
-    this._planetsListSrc = toPlanetList(planetsDataList);
-    if (this._sortOrder) sortPlanetList(this._planetsListSrc, this._sortProp, this._sortOrder);
-    this.resetPageView();
-  }
-
   constructor(private store$: Store<{planetsData: PlanetsData}>) {
     this.store$.pipe( select((state: any) => state.planetsData.planets) ).subscribe(planetsList => {
       this.set(planetsList)
@@ -44,6 +38,12 @@ export class PlanetListService {
     this.store$.pipe( select((state: any) => state.planetsData.state) ).subscribe(planetsDataState => {
       if (planetsDataState == 'iniData') this.store$.dispatch(new GetAll());
     });
+  }
+
+  private set(planetsDataList: Planet[]): void {
+    this._planetsListSrc = toPlanetList(planetsDataList);
+    if (this._sortOrder) sortPlanetList(this._planetsListSrc, this._sortProp, this._sortOrder);
+    this.resetPageView();
   }
 
   private resetPageView() {
