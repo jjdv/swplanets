@@ -3,7 +3,7 @@
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
   </mat-form-field>
   
-  <table mat-table [dataSource]="dataSource" matSort aria-label="Star Wars Planets">
+  <table mat-table class="full-width-table" [dataSource]="dataSource" matSort aria-label="Planet List">
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
