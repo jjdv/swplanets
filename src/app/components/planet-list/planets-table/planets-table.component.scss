@@ -1,3 +1,14 @@
 .full-width-table {
   width: 100%;
 }
+
+tbody > tr {
+  cursor: pointer;
+  td {cursor: pointer;}
+}
+
+input {
+  background-color: black;
+  height: 3em;
+  color: whitesmoke;
+}

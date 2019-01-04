@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { Router } from '@angular/router';
 
 import { PlanetListService, PlanetListEl } from 'src/app/services/planet-list/planet-list.service';
 
@@ -15,7 +16,7 @@ export class PlanetsTableComponent implements OnInit {
 
   displayedColumns = ['name', 'knownPropsNo' , 'residentsNo', 'filmsNo'];
   
-  constructor(private planetListService: PlanetListService) {}
+  constructor(private planetListService: PlanetListService, private router: Router) {}
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource();
@@ -29,6 +30,10 @@ export class PlanetsTableComponent implements OnInit {
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue;
     this.dataSource.paginator.firstPage();
+  }
+
+  displayDetails(id: number) {
+    this.router.navigate([`/planet/${id}`]);
   }
 }
 

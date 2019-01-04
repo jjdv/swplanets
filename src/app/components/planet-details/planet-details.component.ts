@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
-import { PlanetsData } from '../../services/planets/planets.config'
-
 @Component({
   selector: 'planet-details',
   templateUrl: './planet-details.component.html',
@@ -13,10 +11,7 @@ export class PlanetDetailsComponent {
   id: number = 0;
   displayedColumns = ['name', 'knownPropsNo' , 'residentsNo', 'filmsNo'];
   
-  constructor(
-    private location: Location,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private location: Location, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.id = +this.route.snapshot.paramMap.get('id');
