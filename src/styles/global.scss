@@ -1,0 +1,13 @@
+html, body { height: 100%; }
+
+body {
+    margin: 0;
+    padding: 5vh 3vw;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background: {
+        color: black;
+        image: url(../assets/ilnur-kalimullin-153166-unsplash-1080-bw.jpg);
+        size: cover;
+        position: center bottom;
+    }
+}

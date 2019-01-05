@@ -1,0 +1,40 @@
+@import './theme.scss';
+
+.planet-list {
+    mat-form-field#filter {
+        display: block;
+        margin: 0 1em 0.5em;
+        font-size: 14px;
+        color: $foreground;
+        &.mat-focused {
+            label { color: mat-color($accent, lighter); }
+            .mat-form-field-ripple {
+                height: 1px;
+                background-color: mat-color($accent, lighter);
+            }
+        }
+    }
+    table {
+        width: 100%;
+        background-color: unset;
+        tbody > tr {
+            font-size: 14px;
+            height: 2em;
+            cursor: pointer;
+            .mat-cell { font-size: unset; }
+        }
+        th:not(:first-child), td:not(:first-child) { text-align: center;}
+        .mat-icon-button { width: unset; }
+        .mat-paginator-range-label { margin: 0 1em; }
+        .planets-table .mat-paginator-page-size-select { width: 1.5em; }
+    }
+    mat-paginator {
+        background-color: unset;
+        .mat-paginator-page-size-select { width: 3.5em; }
+        .mat-paginator-range-label { margin: 0 1em 0 0; }
+        button {
+            width: unset;
+            .mat-paginator-icon { width: 1.5em; }
+        }
+    }
+}

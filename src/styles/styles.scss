@@ -12,21 +12,15 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$swplanets-primary: mat-palette($mat-gray, 900, 800, 900);
-$swplanets-accent: mat-palette($mat-yellow, 500, 400, 600);
-
-// The warn palette is optional (defaults to red).
-$swplanets-warn: mat-palette($mat-pink, A400);
-
-// Create the theme object (a Sass map containing all of the palettes).
-$swplanets-theme: mat-dark-theme($swplanets-primary, $swplanets-accent, $swplanets-warn);
+@import './theme.scss';
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include angular-material-theme($swplanets-theme);
+@include angular-material-theme($theme);
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@import './global.scss';
+
+@import './components-overlay.scss';

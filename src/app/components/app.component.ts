@@ -20,8 +20,8 @@ export class AppComponent implements OnInit {
     // Preloading data of the rest of the planets (low data volume and high chances it will be used).
     // Actualy should be done before displaying the planet list to display the first page according to some sorting criterion
     // but I wanted to show some code/data split approach with dynamic loading technique
-    this.store$.pipe( select(state => state.planetsData.state) ).subscribe(planetsDataState => {
+    /*this.store$.pipe( select(state => state.planetsData.state) ).subscribe(planetsDataState => {
       if (planetsDataState == 'iniData') this.store$.dispatch(new GetAll());
-    });
+    });*/
   }
 }
