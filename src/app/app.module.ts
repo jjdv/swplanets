@@ -4,12 +4,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {DemoMaterialModule} from './material-module';
+import { MaterialModule } from './modules/material-module';
 
 import { planetsReducer } from './ngrx/planets/planets.reducer';
 import { PlanetsEffects } from './ngrx/planets/planets.effects';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppRoutingModule } from './modules/app-routing.module';
+import { AppComponent } from './components/app.component';
 import { PlanetListComponent } from './components/planet-list/planet-list.component';
 import { PlanetDetailsComponent } from './components/planet-details/planet-details.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
@@ -31,7 +31,7 @@ import { PlanetsDetailsTableComponent } from './components/planet-details/planet
     MatSortModule,
     FormsModule,
     ReactiveFormsModule,
-    DemoMaterialModule
+    MaterialModule
   ],
   declarations: [
     AppComponent,
