@@ -18,12 +18,13 @@
         width: 100%;
         background-color: unset;
         tbody > tr {
-            font-size: 14px;
+            font-size: 13px;
             height: 2em;
             cursor: pointer;
             .mat-cell { font-size: unset; }
         }
-        th:not(:first-child), td:not(:first-child) { text-align: center;}
+        td:not(:first-child) { text-align: center;}
+        th:not(:first-child) .mat-sort-header-container { justify-content: center;}
         .mat-icon-button { width: unset; }
         .mat-paginator-range-label { margin: 0 1em; }
         .planets-table .mat-paginator-page-size-select { width: 1.5em; }

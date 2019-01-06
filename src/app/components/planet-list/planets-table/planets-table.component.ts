@@ -14,7 +14,7 @@ export class PlanetsTableComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<PlanetListEl>;
 
-  displayedColumns = ['name', 'knownPropsNo' , 'residentsNo', 'filmsNo'];
+  displayedColumns = ['name', 'location', 'detailedMap', 'details'];
   
   constructor(private planetListService: PlanetListService, private router: Router) {}
 

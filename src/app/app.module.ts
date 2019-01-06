@@ -17,6 +17,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PlanetsTableComponent } from './components/planet-list/planets-table/planets-table.component';
 import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { PlanetsDetailsTableComponent } from './components/planet-details/planets-details-table/planets-details-table.component';
+import { MapComponent } from './components/planet-list/map/map.component';
+import { DetailedMapComponent } from './components/planet-list/detailed-map/detailed-map.component';
 
 @NgModule({
   imports: [
@@ -39,7 +41,9 @@ import { PlanetsDetailsTableComponent } from './components/planet-details/planet
     PlanetDetailsComponent,
     NotFoundComponent,
     PlanetsTableComponent,
-    PlanetsDetailsTableComponent
+    PlanetsDetailsTableComponent,
+    MapComponent,
+    DetailedMapComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
