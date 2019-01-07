@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 
 import { PlanetListService, PlanetListEl } from 'src/app/services/planet-list/planet-list.service';
@@ -16,7 +16,7 @@ export class PlanetsTableComponent implements OnInit {
 
   displayedColumns = ['name', 'location', 'detailedMap', 'details'];
   
-  constructor(private planetListService: PlanetListService, private router: Router) {}
+  constructor(private planetListService: PlanetListService, private router: Router, private snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource();
@@ -33,7 +33,12 @@ export class PlanetsTableComponent implements OnInit {
   }
 
   displayDetails(id: number) {
-    this.router.navigate([`/planet/${id}`]);
+    if (Number.isInteger(id)) this.router.navigate([`/planet/${id}`]);
+    else this.snackBar.open('No details available for this planet.', 'close', {
+      duration: 3000,
+      verticalPosition: 'top',
+      panelClass: 'snack-bar'
+    });
   }
 }
 

@@ -1,0 +1,25 @@
+.component {
+    padding: 5vh 3vw;
+    button { float: left; }
+    .container {
+        height: 77vh;
+        max-height: 77vh;
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 3vh;
+        planet-details-table {
+            flex: 0 0 350px;
+        }
+        .image {
+            flex: 1 1 calc(100% - 350px - 3vw);
+            margin-left: 3vw;
+            height: 77vh;
+            max-height: 77vh;
+            text-align: center;
+            img {
+                max-height: 100%;
+                max-width: 100%;
+            }
+        }
+    }
+}

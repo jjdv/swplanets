@@ -1,3 +1,6 @@
-<p>
-  detailed-map works!
-</p>
+<div class="container">
+  <div *ngFor="let map of maps" class="image" (click)="fullSize(map.src)">
+    <img [src]="map.src"/>
+    <div class="title">{{map.name}}</div>
+  </div>
+</div>

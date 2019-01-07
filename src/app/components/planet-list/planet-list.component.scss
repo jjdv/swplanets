@@ -1,13 +1,25 @@
 @import '../../../styles/theme.scss';
 
-:host {
-    display: block;
-    width: 350px;
-    border: 2px outset mat-color($accent, darker);
-    background-color: rgba($background, 0.7);
-}
-h2 {
-    margin: 1em 1em 0.5em;
-    text-align: center;
-    color: mat-color($accent, darker);
+.component {
+    padding: 5vh 3vw;
+    .container {
+        height: 77vh;
+        max-height: 77vh;
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 3vh;
+        #planet-list {
+            flex: 0 0 350px;
+            border: 2px outset mat-color($accent, darker);
+            background-color: $background;
+            max-height: 77vh;
+        }
+        app-map {
+            flex: 1 0 calc(100% - 350px - 3vw);
+            margin-left: 3vw;
+            height: 77vh;
+            max-height: 77vh;
+        }
+    }
+    app-detailed-map { height: 10vh; }
 }

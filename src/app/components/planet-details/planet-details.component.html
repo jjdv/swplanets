@@ -1,4 +1,11 @@
-<button (click)="back()">Back</button>
-<h2>Planet details</h2>
-
-<planet-details-table [id]="id"></planet-details-table>
+<div class="component">
+    <button mat-raised-button color="accent" (click)="back()">Back</button>
+    <h1 class="mat-display-2">Planet details</h1>
+    
+    <div class="container">
+        <planet-details-table [id]="id"></planet-details-table>
+        <div class="image">
+                <img src="../../../assets/Ryloth_Rebels.png"/>
+        </div>
+    </div>
+</div>

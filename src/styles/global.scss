@@ -2,7 +2,6 @@ html, body { height: 100%; }
 
 body {
     margin: 0;
-    padding: 5vh 3vw;
     font-family: Roboto, "Helvetica Neue", sans-serif;
     background: {
         color: black;
@@ -11,3 +10,9 @@ body {
         position: center bottom;
     }
 }
+
+h1, h2 {
+    margin-bottom: 1.5em;
+    text-align: center;
+}
+h1, h2 { color: mat-color($accent); }

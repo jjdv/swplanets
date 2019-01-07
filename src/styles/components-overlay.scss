@@ -1,9 +1,9 @@
 @import './theme.scss';
 
-.planet-list {
+#planet-list {
     mat-form-field#filter {
         display: block;
-        margin: 0 1em 0.5em;
+        margin: 0 1em 0;
         font-size: 14px;
         color: $foreground;
         &.mat-focused {
@@ -15,13 +15,17 @@
         }
     }
     table {
-        width: 100%;
-        background-color: unset;
+        width: calc(100% - 2em);
+        margin: 0 auto;
+        background-color: $background;
         tbody > tr {
             font-size: 13px;
             height: 2em;
             cursor: pointer;
             .mat-cell { font-size: unset; }
+            &:hover {
+                td { border-color: mat-color($accent, darker) };
+            }
         }
         td:not(:first-child) { text-align: center;}
         th:not(:first-child) .mat-sort-header-container { justify-content: center;}
@@ -39,3 +43,5 @@
         }
     }
 }
+
+.snack-bar { color: mat-color($warn); }

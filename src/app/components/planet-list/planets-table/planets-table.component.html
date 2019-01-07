@@ -2,33 +2,35 @@
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
 </mat-form-field>
 
-<table mat-table [dataSource]="dataSource" matSort aria-label="Planet List">
-  <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-    <td mat-cell *matCellDef="let row">{{row.name}}</td>
-  </ng-container>
+<div class="table">
+  <table mat-table [dataSource]="dataSource" matSort aria-label="Planet List">
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let row">{{row.name}}</td>
+    </ng-container>
 
-  <!-- Location Column -->
-  <ng-container matColumnDef="location">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Location</th>
-    <td mat-cell *matCellDef="let row">{{row.location}}</td>
-  </ng-container>
+    <!-- Location Column -->
+    <ng-container matColumnDef="location">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Location</th>
+      <td mat-cell *matCellDef="let row">{{row.location}}</td>
+    </ng-container>
 
-  <!-- Detailed Map Column -->
-  <ng-container matColumnDef="detailedMap">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Map</th>
-    <td mat-cell *matCellDef="let row">{{row.detailedMap}}</td>
-  </ng-container>
+    <!-- Detailed Map Column -->
+    <ng-container matColumnDef="detailedMap">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Map</th>
+      <td mat-cell *matCellDef="let row">{{row.detailedMap}}</td>
+    </ng-container>
 
-  <!-- Details Column -->
-  <ng-container matColumnDef="details">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Details</th>
-    <td mat-cell *matCellDef="let row">{{row.details}}</td>
-  </ng-container>
+    <!-- Details Column -->
+    <ng-container matColumnDef="details">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Details</th>
+      <td mat-cell *matCellDef="let row">{{row.details}}</td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="displayDetails(row.id)"></tr>
-</table>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="displayDetails(row.id)"></tr>
+  </table>
+</div>
 
 <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
