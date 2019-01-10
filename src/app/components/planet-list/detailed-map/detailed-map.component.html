@@ -1,6 +1,7 @@
 <div class="container">
-  <div *ngFor="let map of maps" class="image" (click)="fullSize(map.src)">
-    <img [src]="map.src"/>
-    <div class="title">{{map.name}}</div>
-  </div>
+  <app-image
+    *ngFor="let map of maps" [src]="map.src" [title]="map.name"
+    [class]="mapClass$(map.name) | async" [fullScreen$]="mapFullScreen$(map.name)"
+    (openFullScreen)="openFullScreen($event)" (closeFullScreen)="closeFullScreen()"
+  ></app-image>
 </div>

@@ -19,6 +19,7 @@ import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/mate
 import { PlanetsDetailsTableComponent } from './components/planet-details/planets-details-table/planets-details-table.component';
 import { MapComponent } from './components/planet-list/map/map.component';
 import { DetailedMapComponent } from './components/planet-list/detailed-map/detailed-map.component';
+import { ImageComponent } from './components/general/image/image.component';
 
 @NgModule({
   imports: [
@@ -43,7 +44,8 @@ import { DetailedMapComponent } from './components/planet-list/detailed-map/deta
     PlanetsTableComponent,
     PlanetsDetailsTableComponent,
     MapComponent,
-    DetailedMapComponent
+    DetailedMapComponent,
+    ImageComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

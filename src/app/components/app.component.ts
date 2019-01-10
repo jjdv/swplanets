@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   constructor(private store$: Store<{planetsData: PlanetsData}>) {}
 
   ngOnInit() {
-    this.store$.dispatch(new Initialize());
+    //this.store$.dispatch(new Initialize());
 
     // Preloading data of the rest of the planets (low data volume and high chances it will be used).
     // Actualy should be done before displaying the planet list to display the first page according to some sorting criterion

@@ -1,38 +1,18 @@
 @import '../../../../styles/theme.scss';
 
-.container {
-    display: flex;
-    justify-content: space-around;
-    overflow-x: auto;
-    .image {
-        font-size: 12px;
-        img { height: calc(10vh - 1.5em); }
-        .title {
-            color: $foreground;
-            text-align: center;
-        }
-        + .image {margin-left: 5px;}
-    }
+:host {
+    display: block;
+    height: 100%;
 }
-div.full-size {
-    &.closed {
-        display: none;
-        button {
-            display: none;
-        }
-    }
-    &.opened {
-        display: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
+
+.container {
+    height: 100%;
+    overflow-x: auto;
+    app-image {
         height: 100%;
-        padding: 10%;
-        background-color: #00000080;
-        button { float: right; }
-        img {
-            max-width: 80%;
-            max-height: 80%;
-        }
+        font-size: 12px;
+        border: 2px solid transparent;
+        &.highlight { border-color: mat-color($accent); }
+        + app-image {margin-left: 5px;}
     }
 }

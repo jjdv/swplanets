@@ -1,0 +1,53 @@
+@import '../../../../styles/theme.scss';
+
+:host {
+    display: inline-block;
+    height: 100%;
+}
+
+.image {
+    height: 100%;
+    font-size: 12px;
+    border: 2px solid transparent;
+    text-align: center;
+    cursor: pointer;
+    img {height: calc(100% - 1.5em);}
+    .title { color: $foreground; }
+    button { display: none; }
+    &.highlight { border-color: mat-color($accent); }
+    &.full-screen {
+        position: absolute;
+        background-color: #000000d0;
+        z-index: 200;
+        &.highlight { border-width: 0; }
+        button {
+            display: block;
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            opacity: 0;
+        }
+        &.end {
+            transition: all 1s linear;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            font-size: 16px;
+            img {
+                height: calc(50% - 1.5em);
+                margin-top: 10%;
+            }
+            button {
+                display: block;
+                opacity: 1;
+                transition: opacity 1s 1s linear;
+            }
+        }
+        &.close-end {
+            transition: all 1s linear;
+            button { transition: opacity 1s linear; }
+            img { transition: all 1s linear; }
+        }
+    }
+}

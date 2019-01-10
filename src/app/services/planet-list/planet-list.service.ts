@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 import { PlanetsData, Planet } from '../planets/planets.config';
@@ -16,13 +16,12 @@ export type SortOrder = 'asc' | 'desc'
 })
 export class PlanetListService {
   list$: BehaviorSubject<PlanetList>;
-  details$: BehaviorSubject<Planet[]>;
+  details$: BehaviorSubject<Planet[]> = new BehaviorSubject([]);
 
   constructor(private store$: Store<{planetsData: PlanetsData}>) {
     const planetListFromLocations: PlanetListFromLocations = toPlanetListFromLocations(planetLocations);
 
     this.list$ = new BehaviorSubject(toPlanetList(planetListFromLocations, []));
-    this.details$ = new BehaviorSubject([]);
     this.store$.pipe(
       select(state => state.planetsData.planets),
       tap(details => this.details$.next(details)),

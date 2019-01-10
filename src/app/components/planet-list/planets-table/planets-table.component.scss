@@ -1,5 +1,10 @@
+@import '../../../../styles/theme.scss';
 
 .table {
     max-height: calc(77vh - 200px);
-    overflow-y: auto
+    overflow-y: auto;
+    tr:hover .hoverHighlight {
+        color: mat-color($accent);
+        cursor: pointer;
+    }
 }

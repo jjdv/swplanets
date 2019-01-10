@@ -3,6 +3,7 @@ import { MatPaginator, MatSort, MatTableDataSource, MatSnackBar } from '@angular
 import { Router } from '@angular/router';
 
 import { PlanetListService, PlanetListEl } from 'src/app/services/planet-list/planet-list.service';
+import { mapName, DetailedMapService } from '../../../services/detailed-map-highlight/detailed-map.service'
 
 @Component({
   selector: 'planets-table',
@@ -16,7 +17,7 @@ export class PlanetsTableComponent implements OnInit {
 
   displayedColumns = ['name', 'location', 'detailedMap', 'details'];
   
-  constructor(private planetListService: PlanetListService, private router: Router, private snackBar: MatSnackBar) {}
+  constructor(private planetListService: PlanetListService, private router: Router, private snackBar: MatSnackBar, private detailedMapService: DetailedMapService) {}
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource();
@@ -39,6 +40,14 @@ export class PlanetsTableComponent implements OnInit {
       verticalPosition: 'top',
       panelClass: 'snack-bar'
     });
+  }
+
+  highlightOn(mapName: mapName) {
+    this.detailedMapService.highlight(mapName);
+  }
+
+  highlightOff() {
+    this.detailedMapService.highlight(null);
   }
 }
 
