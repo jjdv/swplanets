@@ -1,18 +1,11 @@
 @import '../../../../styles/theme.scss';
 
-:host {
-    display: block;
-    height: 100%;
-}
+:host { display: block; }
 
-.container {
+app-image {
     height: 100%;
-    overflow-x: auto;
-    app-image {
-        height: 100%;
-        font-size: 12px;
-        border: 2px solid transparent;
-        &.highlight { border-color: mat-color($accent); }
-        + app-image {margin-left: 5px;}
-    }
+    font-size: 12px;
+    border: 2px solid transparent;
+    &.highlight { border-color: mat-color($accent); }
+    + app-image {margin-left: 5px;}
 }

@@ -19,27 +19,22 @@ export class PlanetsTableComponent implements OnInit {
   
   constructor(private planetListService: PlanetListService, private router: Router, private snackBar: MatSnackBar, private detailedMapService: DetailedMapService) {}
 
+  filterPlanet(planet: PlanetListEl, filterStr: string) {
+    return planet.name.toLowerCase().includes(filterStr.toLowerCase())
+  }
+
   ngOnInit() {
     this.dataSource = new MatTableDataSource();
     this.planetListService.list$.subscribe(list => {this.dataSource.data = list});
     this.sort.sortChange.subscribe(() => this.paginator.firstPage());
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.dataSource.filterPredicate = filterPlanet;
+    this.dataSource.filterPredicate = this.filterPlanet;
   }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue;
     this.dataSource.paginator.firstPage();
-  }
-
-  displayDetails(id: number) {
-    if (Number.isInteger(id)) this.router.navigate([`/planet/${id}`]);
-    else this.snackBar.open('No details available for this planet.', 'close', {
-      duration: 3000,
-      verticalPosition: 'top',
-      panelClass: 'snack-bar'
-    });
   }
 
   highlightOn(mapName: mapName) {
@@ -49,6 +44,17 @@ export class PlanetsTableComponent implements OnInit {
   highlightOff() {
     this.detailedMapService.highlight(null);
   }
-}
 
-const filterPlanet = (planet: PlanetListEl, filterStr: string) => planet.name.toLowerCase().includes(filterStr.toLowerCase())
+  displayDetails(id: number) {
+    if (Number.isInteger(id)) this.router.navigate([`/planet/${id}`]);
+    else this.snackBar.open('No details available for this planet.', 'close', {
+      duration: 3000,
+      verticalPosition: 'top',
+      panelClass: ['snack-bar', 'warning']
+    });
+  }
+  
+  displayMap(mapName: mapName): void { this.detailedMapService.openFullScreen(mapName); }
+  
+  displayLocation(location: string): void {  }
+}

@@ -1,25 +1,22 @@
 @import '../../../styles/theme.scss';
 
 .component {
+    height: 100vh;
     padding: 5vh 3vw;
+    display: flex;
+    flex-direction: column;
     .container {
-        height: 77vh;
-        max-height: 77vh;
+        flex: 1 1 80vh;
         display: flex;
-        align-items: flex-start;
         margin-bottom: 3vh;
-        #planet-list {
+        planets-table {
             flex: 0 0 350px;
             border: 2px outset mat-color($accent, darker);
-            background-color: $background;
-            max-height: 77vh;
         }
         app-map {
-            flex: 1 0 calc(100% - 350px - 3vw);
+            flex: 1 1 calc(100vw - 350px - 2 * 3vw - 3vw);
             margin-left: 3vw;
-            height: 77vh;
-            max-height: 77vh;
         }
     }
-    app-detailed-map { height: 10vh; }
+    app-detailed-map { flex: 0 0 auto; }
 }

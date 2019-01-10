@@ -1,6 +1,6 @@
 @import './theme.scss';
 
-#planet-list {
+.planets-table {
     mat-form-field#filter {
         display: block;
         margin: 0 1em 0;
@@ -21,10 +21,12 @@
         tbody > tr {
             font-size: 13px;
             height: 2em;
-            cursor: pointer;
             .mat-cell { font-size: unset; }
             &:hover {
-                td { border-color: mat-color($accent, darker) };
+                td {
+                    border-color: mat-color($accent, darker);
+                    transition: color 1s, border-color 1s;
+                }
             }
         }
         td:not(:first-child) { text-align: center;}
@@ -35,7 +37,11 @@
     }
     mat-paginator {
         background-color: unset;
-        .mat-paginator-page-size-select { width: 3.5em; }
+        .mat-paginator-page-size-select {
+            width: 3.5em;
+            &.mat-form-field.mat-focused.mat-primary .mat-select-arrow { color: mat-color($accent, darker); }
+            &.mat-form-field.mat-focused .mat-form-field-ripple { background-color: mat-color($accent, darker); }
+        }
         .mat-paginator-range-label { margin: 0 1em 0 0; }
         button {
             width: unset;
@@ -44,4 +50,4 @@
     }
 }
 
-.snack-bar { color: mat-color($warn); }
+.snack-bar.warning { color: mat-color($warn); }

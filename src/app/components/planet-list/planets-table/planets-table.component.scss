@@ -1,7 +1,19 @@
 @import '../../../../styles/theme.scss';
 
+:host {
+    display: flex;
+    flex-direction: column;
+    background-color: $background;
+}
+
+h2, mat-form-field, mat-paginator {
+    flex: 0 0 auto;
+}
+
+h2 { margin: 1em 0; }
+
 .table {
-    max-height: calc(77vh - 200px);
+    flex: 0 1 auto;
     overflow-y: auto;
     tr:hover .hoverHighlight {
         color: mat-color($accent);

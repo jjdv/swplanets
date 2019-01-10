@@ -1,3 +1,5 @@
+<h2>Planet list</h2>
+
 <mat-form-field id="filter">
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
 </mat-form-field>
@@ -13,26 +15,28 @@
     <!-- Location Column -->
     <ng-container matColumnDef="location">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Location</th>
-      <td mat-cell *matCellDef="let row" class="hoverHighlight">{{row.location}}</td>
+      <td mat-cell *matCellDef="let row" class="hoverHighlight" (click)="displayLocation(row.location)">{{row.location}}</td>
     </ng-container>
 
     <!-- Detailed Map Column -->
     <ng-container matColumnDef="detailedMap">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Map</th>
       <td mat-cell *matCellDef="let row">
-        <span [class]="row.detailedMap != '-' ? 'hoverHighlight' : null">{{row.detailedMap}}</span>
+        <span [class]="row.detailedMap != '-' ? 'hoverHighlight' : null" (click)="displayMap(row.detailedMap)">{{row.detailedMap}}</span>
       </td>
     </ng-container>
 
     <!-- Details Column -->
     <ng-container matColumnDef="details">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Details</th>
-      <td mat-cell *matCellDef="let row">{{row.details}}</td>
+      <td mat-cell *matCellDef="let row">
+          <span [class]="row.details != '-' ? 'hoverHighlight' : null" (click)="displayDetails(row.id)">{{row.details}}</span>
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-      (click)="displayDetails(row.id)" (mouseenter)="highlightOn(row.detailedMap)" (mouseleave)="highlightOff()"
+      (mouseenter)="highlightOn(row.detailedMap)" (mouseleave)="highlightOff()"
     ></tr>
   </table>
 </div>
