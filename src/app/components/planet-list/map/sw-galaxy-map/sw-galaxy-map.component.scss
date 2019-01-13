@@ -1,0 +1,50 @@
+:host {
+    height: 100%;
+    position: relative;
+}
+
+div.sw-galaxy-map {
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    padding-top: calc(100% * 1080 / 1528);
+    max-height: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        max-height: 100%;
+        max-width: 100%;
+    }
+    table.map-grid {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+        font-size: 12px;
+        text-align: center;
+        color: lightcoral;
+        tr > td {
+            position: relative;
+            width: calc(100% / 28);
+            border: 1px solid lightcoral;
+            & > div {
+                position: relative;
+                width: 100%;
+                padding-top: 100%;
+                & > div {
+                    position: absolute;
+                    top: 50%;
+                    left: 0;
+                    width: 100%;
+                    margin-top: -25%;
+                }
+            }
+        }
+        transform: skew(-22deg) rotate(25deg) translate(-330px, 330px);
+    }
+}

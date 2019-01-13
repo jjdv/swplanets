@@ -20,6 +20,7 @@ import { PlanetsDetailsTableComponent } from './components/planet-details/planet
 import { MapComponent } from './components/planet-list/map/map.component';
 import { DetailedMapComponent } from './components/planet-list/detailed-map/detailed-map.component';
 import { ImageComponent } from './components/general/image/image.component';
+import { SwGalaxyMapComponent } from './components/planet-list/map/sw-galaxy-map/sw-galaxy-map.component';
 
 @NgModule({
   imports: [
@@ -45,7 +46,8 @@ import { ImageComponent } from './components/general/image/image.component';
     PlanetsDetailsTableComponent,
     MapComponent,
     DetailedMapComponent,
-    ImageComponent
+    ImageComponent,
+    SwGalaxyMapComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
