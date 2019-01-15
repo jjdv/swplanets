@@ -1,11 +1,15 @@
-<div class="sw-galaxy-map">
-  <img #mapImage src='../../../../../assets/SWGalaxyMap.jpg'/>
-  <table class="map-grid" [ngStyle]="tableStyle">
-      <tr *ngFor="let number of mapNumbers">
-          <td
-            *ngFor="let letter of mapLetters"
-            [id]="letter + number" [class]="(letter + number) == selectedId ? 'selected' : ''"
-          ><div><div>{{letter + number}}</div></div></td>
-      </tr>
-  </table>
+<div #container class="container">
+  <div class="sw-galaxy-map">
+    <img [ngStyle]="mapStyle" src='../../../../../assets/SWGalaxyMap.jpg'/>
+    <table class="map-grid" [ngStyle]="tableStyle">
+        <tr *ngFor="let number of mapNumbers">
+            <td
+              *ngFor="let letter of mapLetters"
+              [id]="letter + number" [class]="(letter + number) == selectedId ? 'selected' : ''"
+            >
+              <div></div>
+            </td>
+        </tr>
+    </table>
+  </div>
 </div>

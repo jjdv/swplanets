@@ -1,22 +1,29 @@
 @import '../../../styles/theme.scss';
 
-.component {
+:host {
     height: 100vh;
     padding: 5vh 3vw;
     display: flex;
     flex-direction: column;
-    .container {
-        flex: 1 1 80vh;
-        display: flex;
-        margin-bottom: 3vh;
-        planets-table {
-            width: 350px;
-            border: 2px outset mat-color($accent, darker);
-        }
-        app-map {
-            width: calc(100vw - 350px - 2 * 3vw - 3vw);
-            margin-left: 3vw;
-        }
+    overflow: hidden;
+}
+.container {
+    flex: 1 1 50vh;
+    planets-table, sw-galaxy-map {
+        display: inline-block;
+        height: 100%;
+        vertical-align: top;
     }
-    app-detailed-map { flex: 1 1 auto; }
+    planets-table {
+        width: 350px;
+        border: 2px outset mat-color($accent, darker);
+    }
+    sw-galaxy-map {
+        width: calc(100vw - 350px - 2 * 3vw - 3vw);
+        margin-left: 3vw;
+    }
+}
+app-detailed-map {
+    flex: 0 0 auto;
+    margin-top: 3vh;
 }

@@ -1,50 +1,46 @@
-:host {
-    height: 100%;
-    position: relative;
-}
+@import '../../../../../styles/theme.scss';
 
-div.sw-galaxy-map {
-    display: block;
-    margin: 0 auto;
-    position: relative;
-    padding-top: calc(100% * 1080 / 1527);
-    max-height: 100%;
-    max-width: 100%;
-    overflow: hidden;
-    img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        max-height: 100%;
-        max-width: 100%;
-    }
-    table.map-grid {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 95.5%;
-        table-layout: fixed;
-        border-collapse: collapse;
-        font-size: 12px;
-        text-align: center;
-        color: lightcoral;
-        tr > td {
-            position: relative;
-            border: 1px solid lightcoral;
-            &.selected { border-color: yellow; }
-            & > div {
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    div.sw-galaxy-map {
+        position: relative;
+        overflow: hidden;
+        img {
+            max-height: 100%;
+            max-width: 100%;
+            &.no-display { display: none; }
+        }
+        table.map-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 95.5%;
+            table-layout: fixed;
+            border-collapse: collapse;
+            font-size: 12px;
+            text-align: center;
+            color: lightcoral;
+            tr > td {
                 position: relative;
-                width: 100%;
-                padding-top: 59%;
+                &.selected {border: 2px solid mat-color($accent, darker); }
                 & > div {
-                    position: absolute;
-                    top: 50%;
-                    left: 0;
+                    position: relative;
                     width: 100%;
-                    margin-top: -25%;
+                    padding-top: 59%;
+                    & > div {
+                        position: absolute;
+                        top: 50%;
+                        left: 0;
+                        width: 100%;
+                        margin-top: -25%;
+                    }
                 }
             }
+            transform: skew(-24deg) rotate(24deg) translate(-12%, -6.2%);
         }
-        transform: skew(-24deg) rotate(24deg) translate(-12%, -6.5%);
     }
 }
