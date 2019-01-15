@@ -7,7 +7,7 @@ div.sw-galaxy-map {
     display: block;
     margin: 0 auto;
     position: relative;
-    padding-top: calc(100% * 1080 / 1528);
+    padding-top: calc(100% * 1080 / 1527);
     max-height: 100%;
     max-width: 100%;
     overflow: hidden;
@@ -22,7 +22,7 @@ div.sw-galaxy-map {
         position: absolute;
         top: 0;
         left: 0;
-        width: 100%;
+        width: 95.5%;
         table-layout: fixed;
         border-collapse: collapse;
         font-size: 12px;
@@ -30,12 +30,12 @@ div.sw-galaxy-map {
         color: lightcoral;
         tr > td {
             position: relative;
-            width: calc(100% / 28);
             border: 1px solid lightcoral;
+            &.selected { border-color: yellow; }
             & > div {
                 position: relative;
                 width: 100%;
-                padding-top: 100%;
+                padding-top: 59%;
                 & > div {
                     position: absolute;
                     top: 50%;
@@ -45,6 +45,6 @@ div.sw-galaxy-map {
                 }
             }
         }
-        transform: skew(-22deg) rotate(25deg) translate(-330px, 330px);
+        transform: skew(-24deg) rotate(24deg) translate(-12%, -6.5%);
     }
 }

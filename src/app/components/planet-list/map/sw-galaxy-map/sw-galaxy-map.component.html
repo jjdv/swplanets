@@ -1,10 +1,10 @@
 <div class="sw-galaxy-map">
-  <img #mapImage src='../../../../../assets/StarWarsGalaxyMap.comp.jpg'/>
+  <img #mapImage src='../../../../../assets/SWGalaxyMap.jpg'/>
   <table class="map-grid" [ngStyle]="tableStyle">
       <tr *ngFor="let number of mapNumbers">
           <td
             *ngFor="let letter of mapLetters"
-            [id]="letter + number" [class]="letter + number == selectedId ? 'selected' : ''"
+            [id]="letter + number" [class]="(letter + number) == selectedId ? 'selected' : ''"
           ><div><div>{{letter + number}}</div></div></td>
       </tr>
   </table>
