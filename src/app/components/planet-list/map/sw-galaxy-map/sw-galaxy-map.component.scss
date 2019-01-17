@@ -6,7 +6,7 @@
     position: relative;
     overflow: hidden;
     div.sw-galaxy-map {
-        position: relative;
+        position: absolute;
         overflow: hidden;
         width: 1527px;
         height: 1080px;
@@ -27,11 +27,8 @@
             left: 0;
             table-layout: fixed;
             border-collapse: collapse;
-            font-size: 10px;
-            text-align: center;
-            color: lightcoral;
             tr > td {
-                border: 2px solid lightcoral;
+                border: 2px solid transparent;
                 &.selected {border: 2px solid mat-color($accent, darker); }
                 & > div {
                     width: calc(1527px / 22 * 0.923);
