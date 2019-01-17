@@ -17,6 +17,7 @@ h2 { margin: 1em 0; }
     overflow-y: auto;
     tr:hover .hoverHighlight {
         color: mat-color($accent);
+        transition: color 0.5 linear;
         cursor: pointer;
     }
 }

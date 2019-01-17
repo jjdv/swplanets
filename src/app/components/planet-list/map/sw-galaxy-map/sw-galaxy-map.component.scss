@@ -29,7 +29,10 @@
             border-collapse: collapse;
             tr > td {
                 border: 2px solid transparent;
-                &.selected {border: 2px solid mat-color($accent, darker); }
+                &.selected {
+                    outline: 3px solid mat-color($accent);
+                    transition: outline 0.5s linear;
+                }
                 & > div {
                     width: calc(1527px / 22 * 0.923);
                     height: calc(1080px / 28 * 0.973);

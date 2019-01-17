@@ -1,6 +1,7 @@
 import { Component, Input, ViewChild, ElementRef, HostListener } from '@angular/core';
 
-import { MapLetters, mapLetters, MapNumbers, mapNumbers } from './map-data'
+import { MapLetters, mapLetters, MapNumbers, mapNumbers } from './map-data';
+import { GalaxyMapHighlightService } from '../../../../services/galaxy-map-highlight/galaxy-map.service';
 
 const hwRatio = 1080 / 1527;
 type TransformStyle = {
@@ -16,10 +17,15 @@ type TransformStyle = {
 export class SwGalaxyMapComponent {
   mapLetters: MapLetters = mapLetters;
   mapNumbers: MapNumbers = mapNumbers;
-  @Input() selectedId: string = 'V18';
+  selectedId: string = '';
   @ViewChild('container') container: ElementRef;
-  style: Element;
   mapSize: TransformStyle = { transform: 'scale(0)' };
+
+  constructor(private highlight: GalaxyMapHighlightService) {
+    this.highlight.map$.subscribe(
+      map => this.selectedId = map
+    );
+  }
 
   @HostListener('window:resize', ['$event'])
   @HostListener('window:load', ['$event'])

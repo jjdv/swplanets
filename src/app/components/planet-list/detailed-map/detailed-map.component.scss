@@ -5,7 +5,9 @@
 app-image {
     height: 100%;
     font-size: 12px;
-    border: 2px solid transparent;
-    &.highlight { border-color: mat-color($accent); }
+    &.highlight {
+        outline: 2px solid mat-color($accent);
+        transition: outline 0.5s linear;
+    }
     + app-image {margin-left: 5px;}
 }

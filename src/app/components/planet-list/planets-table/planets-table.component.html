@@ -36,7 +36,7 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-      (mouseenter)="highlightOn(row.detailedMap)" (mouseleave)="highlightOff()"
+      (mouseenter)="highlightOn(row)" (mouseleave)="highlightOff()"
     ></tr>
   </table>
 </div>

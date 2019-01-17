@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { PlanetListService, PlanetListEl } from 'src/app/services/planet-list/planet-list.service';
 import { mapName, DetailedMapService } from '../../../services/detailed-map-highlight/detailed-map.service'
+import { GalaxyMapHighlightService } from '../../../services/galaxy-map-highlight/galaxy-map.service';
 
 @Component({
   selector: 'planets-table',
@@ -17,7 +18,10 @@ export class PlanetsTableComponent implements OnInit {
 
   displayedColumns = ['name', 'location', 'detailedMap', 'details'];
   
-  constructor(private planetListService: PlanetListService, private router: Router, private snackBar: MatSnackBar, private detailedMapService: DetailedMapService) {}
+  constructor(
+    private planetListService: PlanetListService, private router: Router, private snackBar: MatSnackBar,
+    private detailedMapService: DetailedMapService, private galaxyMapHighlight: GalaxyMapHighlightService
+  ) {}
 
   filterPlanet(planet: PlanetListEl, filterStr: string) {
     return planet.name.toLowerCase().includes(filterStr.toLowerCase())
@@ -37,12 +41,14 @@ export class PlanetsTableComponent implements OnInit {
     this.dataSource.paginator.firstPage();
   }
 
-  highlightOn(mapName: mapName) {
-    this.detailedMapService.highlight(mapName);
+  highlightOn(row: PlanetListEl) {
+    this.detailedMapService.highlight(row.detailedMap);
+    this.galaxyMapHighlight.setMap(row.location);
   }
 
   highlightOff() {
     this.detailedMapService.highlight(null);
+    this.galaxyMapHighlight.setMap('');
   }
 
   displayDetails(id: number) {
