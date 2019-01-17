@@ -3,13 +3,17 @@
 .container {
     height: 100%;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
+    overflow: hidden;
     div.sw-galaxy-map {
         position: relative;
         overflow: hidden;
-        outline: 1px solid yellow;
+        width: 1527px;
+        height: 1080px;
+        top: 50%;
+        left: 50%;
+        margin-left: calc(-1527px / 2);
+        margin-top: calc(-1080px / 2);
         img {
             position: absolute;
             top: 0;
@@ -21,29 +25,20 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 95.5%;
             table-layout: fixed;
             border-collapse: collapse;
-            font-size: 12px;
+            font-size: 10px;
             text-align: center;
             color: lightcoral;
             tr > td {
-                position: relative;
+                border: 2px solid lightcoral;
                 &.selected {border: 2px solid mat-color($accent, darker); }
                 & > div {
-                    position: relative;
-                    width: 100%;
-                    padding-top: 59%;
-                    & > div {
-                        position: absolute;
-                        top: 50%;
-                        left: 0;
-                        width: 100%;
-                        margin-top: -25%;
-                    }
+                    width: calc(1527px / 22 * 0.923);
+                    height: calc(1080px / 28 * 0.973);
                 }
             }
-            transform: skew(-24deg) rotate(24deg) translate(-12%, -6.2%);
+            transform: skew(-24.5deg) rotate(24deg) translate(-12.5%, -6.0%);
         }
     }
 }

@@ -1,10 +1,10 @@
 <div #container class="container">
   <div #map [ngStyle]="mapSize" class="sw-galaxy-map">
     <img src='../../../../../assets/SWGalaxyMap.jpg'/>
-    <table class="map-grid" [ngStyle]="tableStyle">
+    <table class="map-grid">
         <tr *ngFor="let number of mapNumbers">
             <td
-              *ngFor="let letter of mapLetters"
+              *ngFor="let letter of mapLetters" [ngStyle]="tableCellSize"
               [id]="letter + number" [class]="(letter + number) == selectedId ? 'selected' : ''"
             >
               <div></div>
