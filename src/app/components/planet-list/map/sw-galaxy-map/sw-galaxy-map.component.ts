@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, ElementRef, DoCheck, AfterViewChecked, AfterContentInit, AfterContentChecked, AfterViewInit, HostListener } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ElementRef, DoCheck, AfterViewChecked, AfterContentInit, AfterContentChecked, AfterViewInit, HostListener, OnChanges } from '@angular/core';
 
 import { MapLetters, mapLetters, MapNumbers, mapNumbers } from './map-data'
 
@@ -8,8 +8,8 @@ type TableStyle = null | {
 }
 const hwRatio = 1080 / 1527;
 type MapStyle = null | {
-  'max-width': string;
-  'max-height': string;
+  width: string;
+  height: string;
 };
 
 
@@ -18,57 +18,59 @@ type MapStyle = null | {
   templateUrl: './sw-galaxy-map.component.html',
   styleUrls: ['./sw-galaxy-map.component.scss']
 })
-export class SwGalaxyMapComponent implements OnInit {
+export class SwGalaxyMapComponent implements OnInit, DoCheck, AfterContentInit {
   mapLetters: MapLetters = mapLetters;
   mapNumbers: MapNumbers = mapNumbers;
   @Input() selectedId: string = 'V18';
-  @ViewChild('container') container: ElementRef | null = null;
+  @ViewChild('container') container: ElementRef;
+  @ViewChild('map') map: ElementRef;
   tableStyle: TableStyle = null;
-  mapStyle: MapStyle = null;
+  mapSize: MapStyle = {
+    width: '0px',
+    height: '0px'
+  };
 
   @HostListener('window:resize', ['$event'])
   @HostListener('window:load', ['$event'])
   setMapSize() {
-    const img = this.container.nativeElement.querySelector('img');
-    img.classList.add('no-display');
-    //const mapSpace = this.container.nativeElement.getBoundingClientRect();
-    this.mapStyle = {
-      'max-width': this.container.nativeElement.clientWidth + 'px',
-      'max-height': this.container.nativeElement.clientHeight + 'px'
-    };
-    img.classList.remove('no-display');
+    const cWidth = this.container.nativeElement.clientWidth;
+    const cHeight = this.container.nativeElement.clientHeight;
+    console.log('==============================');
+    console.log('cHeight:',cHeight, 'cWidth:',cWidth);
+    console.log('calculated hwRatio:', cHeight/cWidth);
+    if (cHeight/cWidth > hwRatio) {
+      this.mapSize = {
+        width: cWidth + 'px',
+        height: String(cWidth * hwRatio) + 'px'
+      };
+    }
+    else {
+      this.mapSize = {
+        width: String(cHeight / hwRatio) + 'px',
+        height: cHeight + 'px'
+      };
+    }
+    console.log(this.mapSize);
+    console.log('mapSize hwRatio: ' + Number(this.mapSize.height.slice(0, -2))/Number(this.mapSize.width.slice(0, -2)));
   }
 
   ngOnInit() {
-    this.setMapSize();
+    console.log('hwRatio:', hwRatio);
+    //this.setMapSize();
     //this.container.nativeElement.onresize = this.setMapSize;
-    //alert(`height: ${rect.height}px\nwidth: ${rect.width}px`);
-    //console.log('container.nativeElement', this.container.nativeElement);
   }
 
-  ngOnChanges() {
-    this.setMapSize()
+  ngDoCheck() {
+    this.setMapSize();
+    this.map.nativeElement.style.display = 'none';
+    this.setMapSize();
+    this.map.nativeElement.style.display = 'block';
   }
 
-  /*setTableStyle(img: Element) {
-    if (img) {
-      const imgRect = img.getBoundingClientRect();
-      this.tableStyle = {
-        height: imgRect.height + 'px',
-        width: imgRect.width + 'px'
-      }
-    }
-  }*/
-  
-  /*ngDoCheck() {
-    if (this.container.nativeElement) {
-      const imgRect = this.container.nativeElement.getBoundingClientRect();
-      if (imgRect.height && imgRect.width) {
-        this.tableStyle = {
-          height: imgRect.height + 'px',
-          width: imgRect.width + 'px'
-        }
-      }
-    }
-  }*/
+  ngAfterContentInit() {
+    /*this.setMapSize();
+    this.map.nativeElement.style.display = 'none';
+    this.setMapSize();
+    this.map.nativeElement.style.display = 'block';*/
+  }
 }

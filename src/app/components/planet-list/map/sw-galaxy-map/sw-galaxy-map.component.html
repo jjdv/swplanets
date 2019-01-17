@@ -1,6 +1,6 @@
 <div #container class="container">
-  <div class="sw-galaxy-map">
-    <img [ngStyle]="mapStyle" src='../../../../../assets/SWGalaxyMap.jpg'/>
+  <div #map [ngStyle]="mapSize" class="sw-galaxy-map">
+    <img src='../../../../../assets/SWGalaxyMap.jpg'/>
     <table class="map-grid" [ngStyle]="tableStyle">
         <tr *ngFor="let number of mapNumbers">
             <td

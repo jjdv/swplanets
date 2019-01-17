@@ -9,10 +9,13 @@
     div.sw-galaxy-map {
         position: relative;
         overflow: hidden;
+        outline: 1px solid yellow;
         img {
-            max-height: 100%;
-            max-width: 100%;
-            &.no-display { display: none; }
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
         }
         table.map-grid {
             position: absolute;
