@@ -1,7 +1,7 @@
 import { Component, AfterContentInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 
 import { MapLetters, mapLetters, MapNumbers, mapNumbers } from './map-data';
-import { GalaxyMapHighlightService } from '../../../../services/galaxy-map-highlight/galaxy-map.service';
+import { GalaxyMapHighlightService } from '../../../services/galaxy-map-highlight/galaxy-map.service';
 
 const mapResolutionX = 2400;
 const mapResolutionY = 1695;
