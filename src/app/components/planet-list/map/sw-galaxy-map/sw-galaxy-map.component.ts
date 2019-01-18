@@ -1,11 +1,20 @@
-import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, AfterContentInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 
 import { MapLetters, mapLetters, MapNumbers, mapNumbers } from './map-data';
 import { GalaxyMapHighlightService } from '../../../../services/galaxy-map-highlight/galaxy-map.service';
 
-const hwRatio = 1080 / 1527;
+const mapResolutionX = 2400;
+const mapResolutionY = 1695;
+const hwRatio = mapResolutionY / mapResolutionX;
+const offsetXCenter = mapResolutionX / 2;
+const offsetYCenter = mapResolutionY / 2;
+const zoomScale = 5;
+
 type TransformStyle = {
-  transform: string;
+  transform?: string;
+  'margin-left'?: string;
+  'margin-top'?: string;
+  transition?: string;
 };
 
 
@@ -14,31 +23,68 @@ type TransformStyle = {
   templateUrl: './sw-galaxy-map.component.html',
   styleUrls: ['./sw-galaxy-map.component.scss']
 })
-export class SwGalaxyMapComponent implements OnInit {
+export class SwGalaxyMapComponent implements AfterContentInit {
   mapLetters: MapLetters = mapLetters;
   mapNumbers: MapNumbers = mapNumbers;
   selectedId: string = '';
   @ViewChild('container') container: ElementRef;
-  mapSize: TransformStyle = { transform: 'scale(0)' };
+  mapZoom: TransformStyle | null = null;
+  offsetX: number;
+  offsetY: number;
+  scaleFullMap: number;
+  zoomOn: boolean = false;
 
   constructor(private highlight: GalaxyMapHighlightService) {
-    this.highlight.map$.subscribe(
-      map => this.selectedId = map
-    );
+    this.highlight.map$.subscribe( map => this.selectedId = map );
   }
 
   @HostListener('window:resize', ['$event'])
-  setMapSize() {
+  setMapSize(centerX: number = offsetXCenter, centerY: number = offsetYCenter) {
     const cWidth = this.container.nativeElement.clientWidth;
     const cHeight = this.container.nativeElement.clientHeight;
 
-    let mWidth;
+    let mWidth: number;
     if (cHeight/cWidth > hwRatio) mWidth = cWidth;
     else mWidth = cHeight / hwRatio;
-    this.mapSize = { transform: `scale(${mWidth / 1527})` };
+    if (this.zoomOn) {
+      this.offsetX = (cWidth/2 - centerX) / this.scaleFullMap;
+      this.offsetY = (cHeight/2 - centerY) / this.scaleFullMap;
+      this.mapZoom = {
+        transform: `scale(${this.scaleFullMap * zoomScale}) translate(${this.offsetX}px, ${this.offsetY}px)`
+      };
+    } else {
+      this.scaleFullMap = mWidth / mapResolutionX;
+      this.mapZoom = {
+        transition: 'transform 1s linear',
+        transform: `scale(${this.scaleFullMap})`
+      };
+    }
   }
 
-  ngOnInit() {
+  ngAfterContentInit() {
+    this.setMapSize();
+  }
+
+  zoom(event: Event) {
+    if (this.zoomOn) return;
+    event.stopPropagation();
+    const td = <Element>event.currentTarget;
+    //alert("zoom sector: " + td.id);
+    this.selectedId = td.id;
+    const containerRect = this.container.nativeElement.getBoundingClientRect();
+    const tdRect = td.getBoundingClientRect();
+    const tdCenterX = tdRect.left - containerRect.left + tdRect.width/2;
+    const tdCenterY = tdRect.top - containerRect.top + tdRect.height/2;
+    this.zoomOn = true;
+    this.container.nativeElement.classList.add('zoom');
+    this.setMapSize(tdCenterX, tdCenterY);
+  }
+
+  closeZoom() {
+    if (!this.zoomOn) return;
+    this.selectedId = null;
+    this.zoomOn = false;
+    this.container.nativeElement.classList.remove('zoom');
     this.setMapSize();
   }
 }

@@ -37,8 +37,9 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-      (mouseenter)="highlightOn(row)" (mouseleave)="highlightOff()"
+    <tr
+      mat-row *matRowDef="let row; columns: displayedColumns;"
+      (click)="highlightFreeze($event, row)" (mouseenter)="highlightOn($event, row)" (mouseleave)="highlightOff($event)"
     ></tr>
   </table>
 </div>

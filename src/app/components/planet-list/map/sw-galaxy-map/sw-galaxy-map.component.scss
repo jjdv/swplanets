@@ -1,5 +1,11 @@
 @import '../../../../../styles/theme.scss';
 
+$mapResolutionX: 2400px;
+$mapResolutionY: 1695px;
+$mapCellWidth: $mapResolutionX / 22 * 0.94;
+$mapCellHeight: $mapResolutionY / 28 * 1.02;
+$gridTransform: skew(-23.9deg) rotate(24.2deg) translate(-12.0%, -6.3%);
+
 .container {
     height: 100%;
     width: 100%;
@@ -8,12 +14,12 @@
     div.sw-galaxy-map {
         position: absolute;
         overflow: hidden;
-        width: 1527px;
-        height: 1080px;
+        width: $mapResolutionX;
+        height: $mapResolutionY;
         top: 50%;
         left: 50%;
-        margin-left: calc(-1527px / 2);
-        margin-top: calc(-1080px / 2);
+        margin-left: calc(-#{$mapResolutionX} / 2);
+        margin-top: calc(-#{$mapResolutionY} / 2);
         &.scale-transition { transition: transform 0.5s ease-in-out; }
         img {
             position: absolute;
@@ -29,17 +35,39 @@
             table-layout: fixed;
             border-collapse: collapse;
             tr > td {
-                border: 2px solid transparent;
-                &.selected {
+                border: 1px solid transparent;
+                cursor: zoom-in;
+                &.selected, &:hover {
                     outline: 3px solid mat-color($accent);
                     transition: outline 0.5s linear;
                 }
                 & > div {
-                    width: calc(1527px / 22 * 0.923);
-                    height: calc(1080px / 28 * 0.973);
+                    width: $mapCellWidth;
+                    height: $mapCellHeight;
                 }
             }
-            transform: skew(-24.5deg) rotate(24deg) translate(-12.5%, -6.0%);
+            transform: $gridTransform;
+        }
+    }
+    button {
+        display: block;
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        opacity: 0;
+        transition: opacity 0.5s linear;
+    }
+    &.zoom {
+        cursor: zoom-out;
+        div.sw-galaxy-map table.map-grid tr > td {
+            cursor: zoom-out;
+            &:hover:not(.selected) {
+                outline: unset;
+            }
+        }
+        button {
+            opacity: 1;
+            cursor: pointer;
         }
     }
 }

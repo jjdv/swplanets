@@ -15,6 +15,7 @@ export class PlanetsTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<PlanetListEl>;
+  freeze: Boolean = false;
 
   displayedColumns = ['name', 'location', 'detailedMap', 'details'];
   
@@ -41,14 +42,42 @@ export class PlanetsTableComponent implements OnInit {
     this.dataSource.paginator.firstPage();
   }
 
-  highlightOn(row: PlanetListEl) {
-    this.detailedMapService.highlight(row.detailedMap);
-    this.galaxyMapHighlight.setMap(row.location);
+  highlightMaps(location: string | null = null, detailedMap: string | null = null) {
+    this.galaxyMapHighlight.setMap(location);
+    this.detailedMapService.highlight(detailedMap);
   }
 
-  highlightOff() {
-    this.detailedMapService.highlight(null);
-    this.galaxyMapHighlight.setMap('');
+  highlightFreeze(event: Event, row: PlanetListEl) {
+    const tr = <Element>event.currentTarget;
+    if (this.freeze) {
+      if (tr.classList.contains('selected')) {
+        tr.classList.remove('selected');
+        this.freeze = false;
+        return;
+      }
+      tr.parentElement.getElementsByClassName('selected')[0].classList.remove('selected');
+    }
+    tr.classList.add('selected');
+    this.highlightMaps(row.location, row.detailedMap);
+    this.freeze = true;
+  }
+
+  highlightOn(event: Event, row: PlanetListEl) {
+    if (this.freeze) return;
+    const tr = <Element>event.currentTarget;
+    tr.classList.add('selected');
+    this.highlightMaps(row.location, row.detailedMap);
+    //this.detailedMapService.highlight(row.detailedMap);
+    //this.galaxyMapHighlight.setMap(row.location);
+  }
+
+  highlightOff(event: Event) {
+    if (this.freeze) return;
+    const tr = <Element>event.currentTarget;
+    tr.classList.remove('selected');
+    this.highlightMaps(null);
+    //this.detailedMapService.highlight(null);
+    //this.galaxyMapHighlight.setMap('');
   }
 
   displayDetails(id: number) {

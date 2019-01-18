@@ -15,7 +15,8 @@ h2 { margin: 1em 0; }
 .table {
     flex: 0 1 auto;
     overflow-y: auto;
-    tr:hover .hoverHighlight {
+    cursor: default;
+    tr.selected .hoverHighlight {
         color: mat-color($accent);
         transition: color 0.5 linear;
         cursor: pointer;
