@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 
 import { PlanetListService, PlanetListEl } from 'src/app/services/planet-list/planet-list.service';
-import { mapName, DetailedMapService } from '../../../services/detailed-map-highlight/detailed-map.service'
-import { GalaxyMapHighlightService } from '../../../services/galaxy-map-highlight/galaxy-map.service';
+import { MapName, DetailedMapService } from '../../../services/detailed-map-highlight/detailed-map.service'
+import { GalaxyMapService, Location } from '../../../services/galaxy-map-highlight/galaxy-map.service';
 
 @Component({
   selector: 'planets-table',
@@ -14,14 +14,16 @@ import { GalaxyMapHighlightService } from '../../../services/galaxy-map-highligh
 export class PlanetsTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('planetListTable') planetListTable: ElementRef;
   dataSource: MatTableDataSource<PlanetListEl>;
-  freeze: Boolean = false;
+  freeze: boolean = false;
+  zoomedLocation: Location | null = null;
 
   displayedColumns = ['name', 'location', 'detailedMap', 'details'];
   
   constructor(
     private planetListService: PlanetListService, private router: Router, private snackBar: MatSnackBar,
-    private detailedMapService: DetailedMapService, private galaxyMapHighlight: GalaxyMapHighlightService
+    private detailedMapService: DetailedMapService, private galaxyMapService: GalaxyMapService
   ) {}
 
   filterPlanet(planet: PlanetListEl, filterStr: string) {
@@ -35,6 +37,9 @@ export class PlanetsTableComponent implements OnInit {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.dataSource.filterPredicate = this.filterPlanet;
+    this.galaxyMapService.zoomedLocation$.subscribe(zoomedLocation => {
+      this.zoomedLocation = !zoomedLocation || typeof zoomedLocation === 'string' ? <Location | null>zoomedLocation : zoomedLocation.id
+    })
   }
 
   applyFilter(filterValue: string) {
@@ -42,9 +47,9 @@ export class PlanetsTableComponent implements OnInit {
     this.dataSource.paginator.firstPage();
   }
 
-  highlightMaps(location: string | null = null, detailedMap: string | null = null) {
-    this.galaxyMapHighlight.setMap(location);
-    this.detailedMapService.highlight(detailedMap);
+  selectMaps(location: string | null = null, detailedMap: string | null = null) {
+    this.galaxyMapService.selectLocation(location);
+    this.detailedMapService.selectMap(detailedMap);
   }
 
   highlightFreeze(event: Event, row: PlanetListEl) {
@@ -58,26 +63,22 @@ export class PlanetsTableComponent implements OnInit {
       tr.parentElement.getElementsByClassName('selected')[0].classList.remove('selected');
     }
     tr.classList.add('selected');
-    this.highlightMaps(row.location, row.detailedMap);
+    this.selectMaps(row.location, row.detailedMap);
     this.freeze = true;
   }
 
-  highlightOn(event: Event, row: PlanetListEl) {
+  selectOn(event: Event, row: PlanetListEl) {
     if (this.freeze) return;
     const tr = <Element>event.currentTarget;
     tr.classList.add('selected');
-    this.highlightMaps(row.location, row.detailedMap);
-    //this.detailedMapService.highlight(row.detailedMap);
-    //this.galaxyMapHighlight.setMap(row.location);
+    this.selectMaps(row.location, row.detailedMap);
   }
 
-  highlightOff(event: Event) {
+  selectOff(event: Event) {
     if (this.freeze) return;
     const tr = <Element>event.currentTarget;
     tr.classList.remove('selected');
-    this.highlightMaps(null);
-    //this.detailedMapService.highlight(null);
-    //this.galaxyMapHighlight.setMap('');
+    this.selectMaps(null);
   }
 
   displayDetails(id: number) {
@@ -89,7 +90,12 @@ export class PlanetsTableComponent implements OnInit {
     });
   }
   
-  displayMap(mapName: mapName): void { this.detailedMapService.openFullScreen(mapName); }
+  displayDetailedMap(mapName: MapName): void { this.detailedMapService.openFullScreen(mapName); }
   
-  displayLocation(location: string): void {  }
+  toggleLocationZoom(location: Location): void {
+    if (this.zoomedLocation && this.zoomedLocation != location) {
+      setTimeout(() => this.galaxyMapService.toggleLocationZoom(location), 1400);
+    }
+    this.galaxyMapService.toggleLocationZoom(location);
+  }
 }

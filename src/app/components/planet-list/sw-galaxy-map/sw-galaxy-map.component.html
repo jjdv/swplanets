@@ -1,17 +1,15 @@
-<div #container class="container" (click)="closeZoom()">
-  <div #map [ngStyle]="mapZoom" class="sw-galaxy-map">
+<div #container class="container" (click)="zoomOffEvent()">
+  <div [ngStyle]="mapZoom" class="sw-galaxy-map" [class.scale-transition]="scaleTransitionOn">
     <img src='../../../../../assets/swgalaxymaphd.jpg'/>
     <table class="map-grid">
         <tr *ngFor="let number of mapNumbers">
-            <td
-              *ngFor="let letter of mapLetters"
-              [id]="letter + number" [class]="(letter + number) == selectedId ? 'selected' : ''"
-              (click)="zoom($event)"
+            <td *ngFor="let letter of mapLetters"
+              [id]="letter + number" [class]="tdClass(letter + number)" (click)="zoomInEvent($event)"
             >
               <div></div>
             </td>
         </tr>
     </table>
   </div>
-  <button mat-raised-button color="accent" (click)="closeZoom()">Close zoon</button>
+  <button mat-raised-button color="accent" (click)="zoomOffEvent()">Close zoon</button>
 </div>

@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { mapName, DetailedMapService } from '../../../services/detailed-map-highlight/detailed-map.service'
+import { MapName, DetailedMapService } from '../../../services/detailed-map-highlight/detailed-map.service'
 
-const MAPS_NAMES: Array<mapName> = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV'];
+const MAPS_NAMES: Array<MapName> = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV'];
 
 interface mapEl {
   name: string;
@@ -17,10 +17,10 @@ interface mapEl {
   styleUrls: ['./detailed-map.component.scss']
 })
 export class DetailedMapComponent implements OnInit {
-  highlight$: Observable<mapName>;
-  highlight: mapName = null;
-  fullScreen$: Observable<mapName>;
-  fullScreen: mapName = null;
+  highlight$: Observable<MapName>;
+  highlight: MapName = null;
+  fullScreen$: Observable<MapName>;
+  fullScreen: MapName = null;
   readonly maps: mapEl[] = MAPS_NAMES.map(mapName => ({
     name: mapName,
     src: `../../../../assets/${mapName}.jpg`
@@ -29,7 +29,7 @@ export class DetailedMapComponent implements OnInit {
   constructor(private detailedMapService: DetailedMapService) {}
 
   ngOnInit() {
-    this.highlight$ = this.detailedMapService.highlight$;
+    this.highlight$ = this.detailedMapService.selectedMap$;
     this.highlight$.subscribe(h => {
       if (!this.fullScreen) this.highlight = h;
       else this.highlight = null;
@@ -38,15 +38,15 @@ export class DetailedMapComponent implements OnInit {
     this.fullScreen$.subscribe(fs => this.fullScreen = fs);
   }
 
-  mapClass$(mapName: mapName) {
+  mapClass$(mapName: MapName) {
     return this.highlight$.pipe( map(highlight => highlight && mapName == highlight ? 'highlight' : '') );
   }
 
-  mapFullScreen$(mapName: mapName) {
+  mapFullScreen$(mapName: MapName) {
     return this.fullScreen$.pipe( map(fullScreen => fullScreen && mapName == fullScreen ? true : false) );
   }
 
-  openFullScreen(mapName: mapName) { this.detailedMapService.openFullScreen(mapName); }
+  openFullScreen(mapName: MapName) { this.detailedMapService.openFullScreen(mapName); }
 
   closeFullScreen() { this.detailedMapService.closeFullScreen(); }
 }

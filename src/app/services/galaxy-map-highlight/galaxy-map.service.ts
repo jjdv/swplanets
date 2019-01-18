@@ -1,15 +1,23 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-export type mapName = string | null;
+export type Location = string | null;
 
 @Injectable({
   providedIn: 'root'
 })
-export class GalaxyMapHighlightService  {
-  map$: BehaviorSubject<mapName> = new BehaviorSubject(null);
+export class GalaxyMapService  {
+  selectedLocation$: BehaviorSubject<Location> = new BehaviorSubject(null);
+  zoomedLocation$: BehaviorSubject<Location | Element> = new BehaviorSubject(null);
+  zoomed: boolean = false;
 
-  setMap(mapName) {
-    this.map$.next(mapName);
+  selectLocation(location) {
+    this.selectedLocation$.next(location);
+  }
+
+  toggleLocationZoom(location: Location | Element) {
+    if (this.zoomed) this.zoomedLocation$.next(null);
+    else this.zoomedLocation$.next(location);
+    this.zoomed = !this.zoomed;
   }
 }

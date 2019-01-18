@@ -1,20 +1,15 @@
-import { Component, AfterContentInit, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit, AfterContentInit, AfterViewInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 
 import { MapLetters, mapLetters, MapNumbers, mapNumbers } from './map-data';
-import { GalaxyMapHighlightService } from '../../../services/galaxy-map-highlight/galaxy-map.service';
+import { GalaxyMapService, Location } from '../../../services/galaxy-map-highlight/galaxy-map.service';
 
 const mapResolutionX = 2400;
 const mapResolutionY = 1695;
 const hwRatio = mapResolutionY / mapResolutionX;
-const offsetXCenter = mapResolutionX / 2;
-const offsetYCenter = mapResolutionY / 2;
 const zoomScale = 5;
 
 type TransformStyle = {
-  transform?: string;
-  'margin-left'?: string;
-  'margin-top'?: string;
-  transition?: string;
+  transform: string;
 };
 
 
@@ -23,23 +18,39 @@ type TransformStyle = {
   templateUrl: './sw-galaxy-map.component.html',
   styleUrls: ['./sw-galaxy-map.component.scss']
 })
-export class SwGalaxyMapComponent implements AfterContentInit {
+export class SwGalaxyMapComponent implements OnInit, AfterContentInit, AfterViewInit {
   mapLetters: MapLetters = mapLetters;
   mapNumbers: MapNumbers = mapNumbers;
-  selectedId: string = '';
+  selectedLocation: string = '';
+  zoomedLocation: string = '';
   @ViewChild('container') container: ElementRef;
   mapZoom: TransformStyle | null = null;
   offsetX: number;
   offsetY: number;
   scaleFullMap: number;
+  scaleTransitionOn: boolean = false;
   zoomOn: boolean = false;
 
-  constructor(private highlight: GalaxyMapHighlightService) {
-    this.highlight.map$.subscribe( map => this.selectedId = map );
+  constructor(private mapService: GalaxyMapService) {}
+
+  ngOnInit() {
+    this.mapService.selectedLocation$.subscribe( selectedLocation => this.selectedLocation = selectedLocation );
+    this.mapService.zoomedLocation$.subscribe( zoomedLocation => {
+      if (zoomedLocation) this.zoomIn(zoomedLocation)
+      else this.zoomOff()
+    });
+    setTimeout(() => this.scaleTransitionOn = true, 500);
+  }
+
+  ngAfterContentInit() {
+    this.setMapSize();
+  }
+
+  ngAfterViewInit() {
   }
 
   @HostListener('window:resize', ['$event'])
-  setMapSize(centerX: number = offsetXCenter, centerY: number = offsetYCenter) {
+  setMapSize(centerX?: number, centerY?: number) {
     const cWidth = this.container.nativeElement.clientWidth;
     const cHeight = this.container.nativeElement.clientHeight;
 
@@ -54,23 +65,15 @@ export class SwGalaxyMapComponent implements AfterContentInit {
       };
     } else {
       this.scaleFullMap = mWidth / mapResolutionX;
-      this.mapZoom = {
-        transition: 'transform 1s linear',
-        transform: `scale(${this.scaleFullMap})`
-      };
+      this.mapZoom = { transform: `scale(${this.scaleFullMap})` };
     }
   }
 
-  ngAfterContentInit() {
-    this.setMapSize();
-  }
+  zoomIn(el: Element | Location) {
+    const td: Element = typeof el === 'string' ? document.getElementById(el) : el;
+    if (!td) return;
 
-  zoom(event: Event) {
-    if (this.zoomOn) return;
-    event.stopPropagation();
-    const td = <Element>event.currentTarget;
-    //alert("zoom sector: " + td.id);
-    this.selectedId = td.id;
+    this.zoomedLocation = td.id;
     const containerRect = this.container.nativeElement.getBoundingClientRect();
     const tdRect = td.getBoundingClientRect();
     const tdCenterX = tdRect.left - containerRect.left + tdRect.width/2;
@@ -80,11 +83,26 @@ export class SwGalaxyMapComponent implements AfterContentInit {
     this.setMapSize(tdCenterX, tdCenterY);
   }
 
-  closeZoom() {
+  zoomInEvent(event: Event) {
+    if (this.zoomOn) return;
+    event.stopPropagation();
+    const td = <Element>event.currentTarget;
+    this.mapService.toggleLocationZoom(td);
+  }
+
+  zoomOff() {
     if (!this.zoomOn) return;
-    this.selectedId = null;
+    this.zoomedLocation = null;
     this.zoomOn = false;
     this.container.nativeElement.classList.remove('zoom');
     this.setMapSize();
+  }
+
+  zoomOffEvent() {
+    this.mapService.toggleLocationZoom(null);
+  }
+
+  tdClass(location: Location) {
+    return location === this.selectedLocation || location === this.zoomedLocation ? 'selected' : null;
   }
 }

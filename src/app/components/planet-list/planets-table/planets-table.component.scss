@@ -12,13 +12,18 @@ h2, mat-form-field, mat-paginator {
 
 h2 { margin: 1em 0; }
 
-.table {
+.planet-list-table {
     flex: 0 1 auto;
     overflow-y: auto;
     cursor: default;
-    tr.selected .hoverHighlight {
-        color: mat-color($accent);
-        transition: color 0.5 linear;
-        cursor: pointer;
+    tr.selected, tr:hover {
+        cursor: copy;
+        .hoverHighlight {
+            color: mat-color($accent);
+            transition: color 0.3 linear;
+            &.zoom { cursor: zoom-in; }
+            &.zoom.zoomed { cursor: zoom-out; }
+            &.details { cursor: pointer; }
+        }
     }
 }

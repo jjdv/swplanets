@@ -5,9 +5,9 @@
 app-image {
     height: 100%;
     font-size: 12px;
-    &.highlight {
-        outline: 2px solid mat-color($accent);
-        transition: outline 0.5s linear;
+    &.highlight, &:hover {
+        outline: 1px solid mat-color($accent);
+        transition: outline 0.3s linear;
     }
     + app-image {margin-left: 5px;}
 }
