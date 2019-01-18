@@ -10,7 +10,7 @@
     font-size: 12px;
     border: 2px solid transparent;
     text-align: center;
-    cursor: pointer;
+    cursor: zoom-in;
     img {height: calc(100% - 1.5em);}
     .title { color: $foreground; }
     button { display: none; }
@@ -19,6 +19,7 @@
         position: absolute;
         background-color: #000000d0;
         z-index: 200;
+        cursor: zoom-out;
         &.highlight { border-width: 0; }
         button {
             display: block;
@@ -26,6 +27,7 @@
             top: 16px;
             left: 16px;
             opacity: 0;
+            cursor: pointer;
         }
         &.end {
             transition: all 1s linear;

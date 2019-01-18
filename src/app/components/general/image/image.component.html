@@ -1,5 +1,5 @@
-<div #frame [class]="frameClass" [ngStyle]="currentFrameStyle">
-  <button mat-raised-button color="accent" (click)="closeFS()" class="close">Close</button>
-  <img #image [src]="src" (click)="openFS()" [ngStyle]="currentImageStyle"/>
+<div #frame [class]="frameClass" [ngStyle]="currentFrameStyle" (click)="toggleFullScreen()">
+  <button mat-raised-button color="accent">Close zoom</button>
+  <img #image [src]="src" [ngStyle]="currentImageStyle"/>
   <div class="title">{{title}}</div>
 </div>

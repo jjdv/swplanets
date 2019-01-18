@@ -1,6 +1,5 @@
-import { Component, Input, Output, EventEmitter, OnInit, AfterViewChecked, ViewChild, ElementRef } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { map, delay } from 'rxjs/operators';
+import { Component, Input, Output, EventEmitter, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Observable } from 'rxjs';
 
 type Style = {
   top: string;
@@ -25,39 +24,44 @@ export class ImageComponent implements OnInit {
   frameClass: string = 'image';
   currentFrameStyle: Style | null = null;
   currentImageStyle: Style | null = null;
-  fullScreenOn: boolean = false;
-  posFrameStyle: Style;
-  posImageStyle: Style;
+  private fullScreenOn: boolean = false;
+  private posFrameStyle: Style;
+  private posImageStyle: Style;
 
   ngOnInit() {
     this.fullScreen$.subscribe(fullScreen => {
-      if (!this.fullScreenOn && fullScreen) {
-        this.fullScreenOn = true;
-        this.posFrameStyle = this.getPositionStyle(this.frame);
-        this.currentFrameStyle = this.posFrameStyle;
-        this.posImageStyle = this.getPositionStyle(this.image, false);
-        this.currentImageStyle = this.posImageStyle;
-        this.frameClass = 'image full-screen open-start';
-        setTimeout(() => {
-          this.frameClass = 'image full-screen end';
-          this.currentFrameStyle = null;
-          this.currentImageStyle = null;
-        }, 50);
-      } else if (this.fullScreenOn && !fullScreen) {
-        this.frameClass = 'image full-screen close-end';
-        this.currentFrameStyle = this.posFrameStyle;
-        this.currentImageStyle = this.posImageStyle;
-        setTimeout(() => {
-          this.frameClass = 'image';
-          this.currentFrameStyle = null;
-          this.currentImageStyle = null;
-          this.fullScreenOn = false;
-        }, 1000);
-      }
+      if (!this.fullScreenOn && fullScreen) this.toFullScreenTransition();
+      else if (this.fullScreenOn && !fullScreen) this.toIconTransition();
     });
   }
 
-  getPositionStyle(el: ElementRef, width: boolean = true): Style {
+  private toFullScreenTransition() {
+    this.fullScreenOn = true;
+    this.posFrameStyle = this.getPositionStyle(this.frame);
+    this.currentFrameStyle = this.posFrameStyle;
+    this.posImageStyle = this.getPositionStyle(this.image, false);
+    this.currentImageStyle = this.posImageStyle;
+    this.frameClass = 'image full-screen open-start';
+    setTimeout(() => {
+      this.frameClass = 'image full-screen end';
+      this.currentFrameStyle = null;
+      this.currentImageStyle = null;
+    }, 50);
+  }
+
+  private toIconTransition() {
+    this.frameClass = 'image full-screen close-end';
+    this.currentFrameStyle = this.posFrameStyle;
+    this.currentImageStyle = this.posImageStyle;
+    setTimeout(() => {
+      this.frameClass = 'image';
+      this.currentFrameStyle = null;
+      this.currentImageStyle = null;
+      this.fullScreenOn = false;
+    }, 1000);
+  }
+
+  private getPositionStyle(el: ElementRef, width: boolean = true): Style {
     const rect = el.nativeElement.getBoundingClientRect();
     const posStyle: Style = {
       top: rect.top + 'px',
@@ -68,6 +72,8 @@ export class ImageComponent implements OnInit {
     return posStyle;
   }
 
-  openFS() { this.openFullScreen.emit(this.title); }
-  closeFS() { this.closeFullScreen.emit(); }
+  toggleFullScreen() {
+    if (this.fullScreenOn) this.closeFullScreen.emit();
+    else this.openFullScreen.emit(this.title);
+  }
 }
