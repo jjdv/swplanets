@@ -15,7 +15,9 @@
     <!-- Location Column -->
     <ng-container matColumnDef="location">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Location</th>
-      <td mat-cell *matCellDef="let row" class="hoverHighlight" (click)="displayLocation(row.location)">{{row.location}}</td>
+      <td mat-cell *matCellDef="let row">
+        <span class="hoverHighlight" (click)="displayLocation(row.location)">{{row.location}}</span>
+      </td>
     </ng-container>
 
     <!-- Detailed Map Column -->

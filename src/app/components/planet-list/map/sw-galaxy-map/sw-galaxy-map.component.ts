@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 
 import { MapLetters, mapLetters, MapNumbers, mapNumbers } from './map-data';
 import { GalaxyMapHighlightService } from '../../../../services/galaxy-map-highlight/galaxy-map.service';
@@ -14,7 +14,7 @@ type TransformStyle = {
   templateUrl: './sw-galaxy-map.component.html',
   styleUrls: ['./sw-galaxy-map.component.scss']
 })
-export class SwGalaxyMapComponent {
+export class SwGalaxyMapComponent implements OnInit {
   mapLetters: MapLetters = mapLetters;
   mapNumbers: MapNumbers = mapNumbers;
   selectedId: string = '';
@@ -28,7 +28,6 @@ export class SwGalaxyMapComponent {
   }
 
   @HostListener('window:resize', ['$event'])
-  @HostListener('window:load', ['$event'])
   setMapSize() {
     const cWidth = this.container.nativeElement.clientWidth;
     const cHeight = this.container.nativeElement.clientHeight;
@@ -37,5 +36,9 @@ export class SwGalaxyMapComponent {
     if (cHeight/cWidth > hwRatio) mWidth = cWidth;
     else mWidth = cHeight / hwRatio;
     this.mapSize = { transform: `scale(${mWidth / 1527})` };
+  }
+
+  ngOnInit() {
+    this.setMapSize();
   }
 }
