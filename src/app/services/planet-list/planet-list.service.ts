@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
-import { PlanetsData, Planet } from '../planets/planets.config';
+import { PlanetsData, Planet } from '../get-planets/get-planets.config';
 import { toPlanetListFromLocations, toPlanetList, PlanetListFromLocations, PlanetList } from './planet-list.service.helpers';
 import { planetLocations } from './planet-locations'
 

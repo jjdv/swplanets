@@ -1,4 +1,4 @@
-import { Planet } from '../planets/planets.config';
+import { Planet } from '../get-planets/get-planets.config';
 import { stringify } from '@angular/core/src/util';
 
 export type PlanetLocations = string;

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Initialize, GetAll } from '../ngrx/planets/planets.actions'
 import { Store, select } from '@ngrx/store';
 
-import { PlanetsData } from '../services/planets/planets.config';
+import { PlanetsData } from '../services/get-planets/get-planets.config';
 
 @Component({
   selector: 'app-root',

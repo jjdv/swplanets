@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PlanetsService } from './planets.service';
+import { GetPlanetsService } from './get-planets.service';
 
-describe('PlanetsService', () => {
+describe('GetPlanetsService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: PlanetsService = TestBed.get(PlanetsService);
+    const service: GetPlanetsService = TestBed.get(GetPlanetsService);
     expect(service).toBeTruthy();
   });
 });

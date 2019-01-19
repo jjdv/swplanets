@@ -5,16 +5,16 @@ import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 import { ActionTypes, SaveIniData, SaveAllData, ReportError } from './planets.actions'
-import { PlanetsService } from '../../services/planets/planets.service';
+import { GetPlanetsService } from '../../services/get-planets/get-planets.service';
 
  
 @Injectable()
 export class PlanetsEffects {
  
-    constructor(private planetsService: PlanetsService, private actions$: Actions) {}
+    constructor(private getPlanetsService: GetPlanetsService, private actions$: Actions) {}
 
     getPlanetsAction$(targetState: 'iniData' | 'allData'): Observable<Action> {
-        return this.planetsService.getPlanets$(targetState).pipe(
+        return this.getPlanetsService.getPlanets$(targetState).pipe(
             map(reply => typeof reply !== 'string'
                 // If successful (reply as apiData object), dispatch success action with result
                 ? ( targetState === 'iniData' ? new SaveIniData(reply) : new SaveAllData(reply) )
@@ -26,12 +26,12 @@ export class PlanetsEffects {
     @Effect()
     initialize$: Observable<Action> = this.actions$.pipe(
         ofType(ActionTypes.Initialize),
-        switchMap(action => this.getPlanetsAction$('iniData'))
+        switchMap(() => this.getPlanetsAction$('iniData'))
     );
 
     @Effect()
     getAll$: Observable<Action> = this.actions$.pipe(
         ofType(ActionTypes.GetAll),
-        switchMap(action => this.getPlanetsAction$('allData'))
+        switchMap(() => this.getPlanetsAction$('allData'))
     );
 }

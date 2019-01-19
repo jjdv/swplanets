@@ -1,4 +1,4 @@
-import { Planet } from '../../services/planets/planets.config'
+import { Planet } from '../../services/get-planets/get-planets.config'
 
 export interface PlanetDetailsEl {
     propertyName: string;

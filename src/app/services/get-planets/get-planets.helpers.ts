@@ -1,4 +1,4 @@
-import { ApiData, PlanetsData } from './planets.config';
+import { ApiData, PlanetsData } from './get-planets.config';
 
 export function mergeApiPlanetsData(srcData: PlanetsData, addData: ApiData): PlanetsData {
     return {

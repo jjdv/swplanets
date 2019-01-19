@@ -1,4 +1,4 @@
-import { PlanetsData, PlanetsIniData } from '../../services/planets/planets.config'
+import { PlanetsData, PlanetsIniData } from '../../services/get-planets/get-planets.config'
 import { ActionTypes, ActionsUnion } from './planets.actions'
 
 function stateUpdatedWithPayload(state, payload) {

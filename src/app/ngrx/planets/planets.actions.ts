@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { PlanetsData } from 'src/app/services/planets/planets.config';
+import { PlanetsData } from 'src/app/services/get-planets/get-planets.config';
 
 export enum ActionTypes {
     Initialize = '[PlanetList Component] Initialize',

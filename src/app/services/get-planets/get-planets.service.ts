@@ -5,18 +5,18 @@ import { Store, select } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { switchMap, retry, map, catchError } from 'rxjs/operators';
 
-import { planetsIniNo, retryNo, ApiData, PlanetsData, PlanetsIniData } from './planets.config';
-import { apiDataOk, mergeApiPlanetsData } from './planets.helpers'
+import { planetsIniNo, retryNo, ApiData, PlanetsData, PlanetsIniData } from './get-planets.config';
+import { apiDataOk, mergeApiPlanetsData } from './get-planets.helpers'
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class PlanetsService {
+export class GetPlanetsService {
   planetsData: PlanetsData = PlanetsIniData;
   
   constructor(private http: HttpClient, private store: Store<{planetsData: PlanetsData}>) {
-    store.pipe( select('planetsData') ).subscribe(
+    this.store.pipe( select('planetsData') ).subscribe(
       (planetsData: PlanetsData) => this.planetsData = planetsData
     );
   }
