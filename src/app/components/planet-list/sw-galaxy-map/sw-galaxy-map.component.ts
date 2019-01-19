@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit, AfterContentChecked, ViewChild, ElementRef, HostListener } from '@angular/core';
 
 import { MapLetters, mapLetters, MapNumbers, mapNumbers } from './map-data';
 import { GalaxyMapService, Location } from '../../../services/galaxy-map/galaxy-map.service';
@@ -18,7 +18,7 @@ type TransformStyle = {
   templateUrl: './sw-galaxy-map.component.html',
   styleUrls: ['./sw-galaxy-map.component.scss']
 })
-export class SwGalaxyMapComponent implements OnInit, AfterViewChecked {
+export class SwGalaxyMapComponent implements OnInit, AfterContentChecked {
   mapLetters: MapLetters = mapLetters;
   mapNumbers: MapNumbers = mapNumbers;
   selectedLocation: string = '';
@@ -39,10 +39,10 @@ export class SwGalaxyMapComponent implements OnInit, AfterViewChecked {
       if (zoomedLocation) this.zoomIn(zoomedLocation)
       else this.zoomOff()
     });
+    setTimeout(() => this.setMapSize());
   }
 
-  ngAfterViewChecked() {
-    setTimeout(() => this.setMapSize());
+  ngAfterContentChecked() {
     setTimeout(() => this.scaleTransitionOn = true, 500);
   }
 
