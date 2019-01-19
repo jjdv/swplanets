@@ -38,7 +38,7 @@ $gridTransform: skew(-23.9deg) rotate(24.2deg) translate(-12.0%, -6.3%);
                 border: 1px solid transparent;
                 cursor: zoom-in;
                 &.selected, &:hover {
-                    outline: 3px solid mat-color($accent);
+                    outline: 5px solid mat-color($accent);
                     transition: outline 0.3s linear;
                 }
                 & > div {
