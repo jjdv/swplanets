@@ -2,12 +2,12 @@
 
 :host { display: block; }
 
-app-image {
+mini-map {
     height: 100%;
     font-size: 12px;
     &.highlight, &:hover {
         outline: 1px solid mat-color($accent);
         transition: outline 0.3s linear;
     }
-    + app-image {margin-left: 5px;}
+    + mini-map {margin-left: 5px;}
 }

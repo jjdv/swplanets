@@ -8,7 +8,7 @@ import { MaterialModule } from './modules/material-module';
 
 import { planetsReducer } from './ngrx/planets/planets.reducer';
 import { PlanetsEffects } from './ngrx/planets/planets.effects';
-import { AppRoutingModule } from './modules/app-routing.module';
+import { RoutingModule } from './modules/routing.module';
 import { AppComponent } from './components/app.component';
 import { PlanetListComponent } from './components/planet-list/planet-list.component';
 import { PlanetDetailsComponent } from './components/planet-details/planet-details.component';
@@ -26,7 +26,7 @@ import { SwGalaxyMapComponent } from './components/planet-list/sw-galaxy-map/sw-
     BrowserModule,
     StoreModule.forRoot({ planetsData: planetsReducer }),
     EffectsModule.forRoot([PlanetsEffects]),
-    AppRoutingModule,
+    RoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatTableModule,

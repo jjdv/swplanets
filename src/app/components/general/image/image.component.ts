@@ -9,7 +9,7 @@ type Style = {
 }
 
 @Component({
-  selector: 'app-image',
+  selector: 'mini-map',
   templateUrl: './image.component.html',
   styleUrls: ['./image.component.scss']
 })

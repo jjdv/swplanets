@@ -1,7 +1,7 @@
 <div class="container">
-  <app-image
+  <mini-map
     *ngFor="let map of maps" [src]="map.src" [title]="map.name"
     [class]="mapClass$(map.name) | async" [fullScreen$]="mapFullScreen$(map.name)"
     (openFullScreen)="openFullScreen($event)" (closeFullScreen)="closeFullScreen()"
-  ></app-image>
+  ></mini-map>
 </div>

@@ -12,7 +12,7 @@ interface mapEl {
 }
 
 @Component({
-  selector: 'app-detailed-map',
+  selector: 'detailed-map',
   templateUrl: './detailed-map.component.html',
   styleUrls: ['./detailed-map.component.scss']
 })
