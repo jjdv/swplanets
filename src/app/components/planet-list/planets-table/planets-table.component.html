@@ -14,7 +14,10 @@
 
     <!-- Location Column -->
     <ng-container matColumnDef="location">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Location</th>
+      <th
+        mat-header-cell *matHeaderCellDef mat-sort-header
+        matTooltip="Sector of the planet location on the Galaxy Map." matTooltipPosition="above"
+      >Sector</th>
       <td mat-cell *matCellDef="let row">
         <span class="hoverHighlight zoom" [class.zoomed]="row.location == zoomedLocation" (click)="toggleLocationZoom(row.location)">{{row.location}}</span>
       </td>
@@ -22,7 +25,10 @@
 
     <!-- Detailed Map Column -->
     <ng-container matColumnDef="detailedMap">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Map</th>
+      <th
+        mat-header-cell *matHeaderCellDef mat-sort-header
+        matTooltip="Detailed map presenting planet." matTooltipPosition="above"
+      >Map</th>
       <td mat-cell *matCellDef="let row">
         <span [class]="row.detailedMap != '-' ? 'hoverHighlight zoom' : null" (click)="displayDetailedMap(row.detailedMap)">{{row.detailedMap}}</span>
       </td>
@@ -30,9 +36,15 @@
 
     <!-- Details Column -->
     <ng-container matColumnDef="details">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Details</th>
+      <th
+        mat-header-cell *matHeaderCellDef mat-sort-header
+        matTooltip="Numbe of properties available. Click item to go to detals." matTooltipPosition="above"
+      >Details</th>
       <td mat-cell *matCellDef="let row">
-          <span [class]="row.details != '-' ? 'hoverHighlight details' : null" (click)="displayDetails(row.id)">{{row.details}}</span>
+          <span (click)="displayDetails(row.id)" [class]="row.details != '-' ? 'hoverHighlight details' : null">
+            <span *ngIf="row.details > 0" class="icon">🗏</span>
+            <span>{{row.details > 0 ? row.details : '-'}}</span>
+          </span>
       </td>
     </ng-container>
 

@@ -1,5 +1,4 @@
 import { Planet } from '../get-planets/get-planets.config';
-import { stringify } from '@angular/core/src/util';
 
 export type PlanetLocations = string;
 export type PlanetLocationsArr = Array<string>;
@@ -52,7 +51,7 @@ export function toPlanetList(planetListFromLocations: PlanetListFromLocations, p
         planetList.push({
           ...planetListEl,
           id: null,
-          details: '-',
+          details: 0,
         })
       } else {
         planet = planetDetailsArr[index];
@@ -60,11 +59,11 @@ export function toPlanetList(planetListFromLocations: PlanetListFromLocations, p
         residents = Array.isArray(planet.residents) && planet.residents.length > 0 ? 1 : 0;
         films = Array.isArray(planet.films) && planet.films.length > 0 ? 1 : 0;
         details = knownPropsNo + residents + films;
-        details = details > 0 ? details.toString() : '-';
+        //details = details > 0 ? details.toString() : '-';
         planetList.push({
           ...planetListEl,
           id: index,
-          details: details + ' prop.'
+          details: details// + ' prop.'
         })
       }
     };

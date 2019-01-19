@@ -29,14 +29,14 @@ function propToName(prop: string): string {
 
 function propValToValue(prop, val) {
   switch (prop) {
-    case 'surface_water': return val + '%';
-    case 'residents': return val.length;
-    case 'films': return val.length;
-    case 'rotation_period': return val + 'h';
-    case 'orbital_period': return val + ' days';
-    case 'diameter': return val + ' km';
-    case 'gravity': return val.slice(0, -8) + 'x gravity of Earth';
-    case 'population': return Number(val).toLocaleString();
+    case 'surface_water': return Number(val) !== NaN ? val + '%' : 'unknown';
+    case 'residents': return Array.isArray(val) ? val.length : 'unknown';
+    case 'films': return Array.isArray(val) ? val.length : 'unknown';
+    case 'rotation_period': return Number(val) !== NaN ? val + 'h' : 'unknown';;
+    case 'orbital_period': return Number(val) !== NaN ? val + ' days' : 'unknown';;
+    case 'diameter': return Number(val) !== NaN ? val + ' km' : 'unknown';;
+    case 'gravity': return Number(val.slice(0, -9)) !== NaN ? val.slice(0, -9) + ' x gravity of the Earth' : val;
+    case 'population': return Number.isInteger(val) ? Number(val).toLocaleString() : 'unknown';
     default: return val
   }
 }

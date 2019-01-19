@@ -3,13 +3,21 @@
     <!-- Property Name Column -->
     <ng-container matColumnDef="propertyName">
       <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let row">{{row.propertyName}}</td>
+      <td mat-cell *matCellDef="let row">
+          <span>{{row.propertyName}}</span>
+          <span
+            *ngIf="row.propertyName == 'Population'"
+            matTooltip="The average population of sentient beings inhabiting this planet." matTooltipPosition="above" class="info"
+          >ⓘ</span>
+        </td>
     </ng-container>
 
     <!-- Value Column -->
     <ng-container matColumnDef="value">
       <th mat-header-cell *matHeaderCellDef>Value</th>
-      <td mat-cell *matCellDef="let row">{{row.value}}</td>
+      <td mat-cell *matCellDef="let row">
+          <span class="value">{{row.value}}</span>
+        </td>
     </ng-container>
 
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

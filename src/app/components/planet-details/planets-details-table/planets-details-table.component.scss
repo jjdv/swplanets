@@ -1,3 +1,10 @@
+@import '../../../../styles/theme.scss';
+
 .full-width-table {
   width: 100%;
+  span.info {
+    font-size: 18px;
+    margin-left: 5px;
+  }
+  td.mat-cell { padding: 0 1em; }
 }

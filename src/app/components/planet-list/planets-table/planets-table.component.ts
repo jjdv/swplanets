@@ -42,6 +42,10 @@ export class PlanetsTableComponent implements OnInit {
     })
   }
 
+  randomString(str: string) {
+    return String.fromCharCode(97+Math.round(Math.random()*25), 97+Math.round(Math.random()*25)) + '||' + str;
+  }
+
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue;
     this.dataSource.paginator.firstPage();
