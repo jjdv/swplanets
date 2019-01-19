@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { MapName, DetailedMapService } from '../../../services/detailed-map-highlight/detailed-map.service'
+import { MapName, DetailedMapService } from '../../../services/detailed-map/detailed-map.service'
 
 const MAPS_NAMES: Array<MapName> = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV'];
 

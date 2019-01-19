@@ -3,8 +3,8 @@ import { MatPaginator, MatSort, MatTableDataSource, MatSnackBar } from '@angular
 import { Router } from '@angular/router';
 
 import { PlanetListService, PlanetListEl } from 'src/app/services/planet-list/planet-list.service';
-import { MapName, DetailedMapService } from '../../../services/detailed-map-highlight/detailed-map.service'
-import { GalaxyMapService, Location } from '../../../services/galaxy-map-highlight/galaxy-map.service';
+import { MapName, DetailedMapService } from '../../../services/detailed-map/detailed-map.service'
+import { GalaxyMapService, Location } from '../../../services/galaxy-map/galaxy-map.service';
 
 @Component({
   selector: 'planets-table',
