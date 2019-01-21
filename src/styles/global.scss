@@ -56,14 +56,13 @@ img.sw-logo {
     @media screen and (min-width: 360px) { width: 350px; }
     max-height: 500px;
     @media screen and (min-height: 600px) { max-height: calc(100vh - 4vh - 130px); }
+    font-size: 13px;
     margin: 0 auto;
+    padding: 1em;
     background-color: rgba($background, 0.3);
     border: 1px outset mat-color($accent, darker);
-    h2 { margin: 1em 0 0; }
     table {
-        width: calc(100% - 2em);
-        margin: 0 auto;
-        font-size: 13px;
+        width: 100%;
         th:not(:first-child) .mat-sort-header-container { justify-content: center;}
         tbody  > tr {
             height: 2em;
@@ -76,4 +75,10 @@ img.sw-logo {
     }
 }
 
+.more {
+    margin-top: 1em;
+    text-align: center;
+    color: mat-color($warn);
+    @media screen and (min-width: 960px) { display: none; }
+}
 .snack-bar.warning { color: mat-color($warn); }
