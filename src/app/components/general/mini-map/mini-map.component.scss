@@ -2,16 +2,14 @@
 
 :host {
     display: inline-block;
-    height: 10vh;
 }
 
 .image {
-    height: 10vh;
     font-size: 12px;
     border: 2px solid transparent;
     text-align: center;
     cursor: zoom-in;
-    img {height: calc(100% - 1.5em);}
+    img { height: 7vh; }
     .title { color: $foreground; }
     button { display: none; }
     &.highlight { border-color: mat-color($accent); }

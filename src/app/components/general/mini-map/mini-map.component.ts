@@ -10,10 +10,10 @@ type Style = {
 
 @Component({
   selector: 'mini-map',
-  templateUrl: './image.component.html',
-  styleUrls: ['./image.component.scss']
+  templateUrl: './mini-map.component.html',
+  styleUrls: ['./mini-map.component.scss']
 })
-export class ImageComponent implements OnInit {
+export class MiniMapComponent implements OnInit {
   @Input() src: string = '';
   @Input() title: string = '';
   @Input() fullScreen$: Observable<boolean>;
