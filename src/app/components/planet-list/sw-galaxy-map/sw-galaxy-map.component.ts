@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentChecked, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 
 import { MapLetters, mapLetters, MapNumbers, mapNumbers } from './map-data';
 import { GalaxyMapService, Location } from '../../../services/galaxy-map/galaxy-map.service';
@@ -18,15 +18,15 @@ type TransformStyle = {
   templateUrl: './sw-galaxy-map.component.html',
   styleUrls: ['./sw-galaxy-map.component.scss']
 })
-export class SwGalaxyMapComponent implements OnInit, AfterContentChecked {
+export class SwGalaxyMapComponent implements OnInit, AfterViewInit {
   mapLetters: MapLetters = mapLetters;
   mapNumbers: MapNumbers = mapNumbers;
   selectedLocation: string = '';
   zoomedLocation: string = '';
   @ViewChild('container') container: ElementRef;
-  mapZoom: TransformStyle | null = null;
-  offsetX: number;
-  offsetY: number;
+  mapZoom: TransformStyle | null = { transform: `scale(0)` };
+  scale: string = '';
+  translate: string = '';
   scaleFullMap: number;
   scaleTransitionOn: boolean = false;
   zoomOn: boolean = false;
@@ -39,34 +39,46 @@ export class SwGalaxyMapComponent implements OnInit, AfterContentChecked {
       if (zoomedLocation) this.zoomIn(zoomedLocation)
       else this.zoomOff()
     });
-    setTimeout(() => this.setMapSize());
   }
 
-  ngAfterContentChecked() {
-    setTimeout(() => this.scaleTransitionOn = true, 500);
+  ngAfterViewInit() {
+    setTimeout(() => this.setMapSize(), 1000);
   }
 
-  @HostListener('window:resize', ['$event'])
-  setMapSize(centerX?: number, centerY?: number) {
+  private setMapZoom(): void {
+    this.mapZoom = { transform: `${this.scale} ${this.translate}` };
+  }
+
+  @HostListener('window:resize')
+  private setMapSize(centerX?: number, centerY?: number) {
     const cWidth = this.container.nativeElement.clientWidth;
     const cHeight = this.container.nativeElement.clientHeight;
 
+    // calculation of the map width (mWidth) based on the container dimensions
     let mWidth: number;
     if (cHeight/cWidth > hwRatio) mWidth = cWidth;
     else mWidth = cHeight / hwRatio;
+
     if (this.zoomOn) {
-      this.offsetX = (cWidth/2 - centerX) / this.scaleFullMap;
-      this.offsetY = (cHeight/2 - centerY) / this.scaleFullMap;
-      this.mapZoom = {
-        transform: `scale(${this.scaleFullMap * zoomScale}) translate(${this.offsetX}px, ${this.offsetY}px)`
-      };
+      const offsetX = (cWidth/2 - centerX) / this.scaleFullMap;
+      const offsetY = (cHeight/2 - centerY) / this.scaleFullMap;
+      this.translate = `translate(${offsetX}px, ${offsetY}px)`;
+      this.setMapZoom();
+      this.scale = `scale(${this.scaleFullMap * zoomScale})`;
+      setTimeout(() => this.setMapZoom(), 500); // two phase transform due to Firefox non-synchronous transformations
+      //this.mapZoom = {transform: `scale(${this.scaleFullMap * zoomScale}) ${this.translate}`};
     } else {
       this.scaleFullMap = mWidth / mapResolutionX;
-      this.mapZoom = { transform: `scale(${this.scaleFullMap})` };
+      this.scale = `scale(${this.scaleFullMap})`;
+      this.setMapZoom();
+      if (this.translate) {
+        this.translate = '';
+        setTimeout(() => this.setMapZoom(), 500);
+      }
     }
   }
 
-  zoomIn(el: Element | Location) {
+  private zoomIn(el: Element | Location) {
     const td: Element = typeof el === 'string' ? document.getElementById(el) : el;
     if (!td) return;
 
@@ -87,7 +99,7 @@ export class SwGalaxyMapComponent implements OnInit, AfterContentChecked {
     this.mapService.toggleLocationZoom(td);
   }
 
-  zoomOff() {
+  private zoomOff() {
     if (!this.zoomOn) return;
     this.zoomedLocation = null;
     this.zoomOn = false;

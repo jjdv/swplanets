@@ -1,12 +1,17 @@
+
+/* global reset */
+
 *, *:before, *:after {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 }
 
-html, body { height: 100%; }
+/* app global config */
 
+html { font-size: 15px; }
 body {
+    height: 100vh;
     font-family: Roboto, "Helvetica Neue", sans-serif;
     background: {
         color: black;
@@ -15,9 +20,42 @@ body {
         position: center bottom;
     }
 }
+.page {
+    height: 100vh;
+    min-height: calc(640px);
+    padding: 2vh 0;
+    @media screen and (min-width: 360px) { padding: 2vh 3vw; }
+}
 
 h1, h2 {
-    margin-bottom: 1.5em;
+    margin-bottom: 1em;
     text-align: center;
+    color: mat-color($accent);
 }
-h1, h2 { color: mat-color($accent); }
+h1 {
+    font-size: 35px;
+    @media screen and (min-width: 960px) { font-size: 50px; }
+    font-weight: bold;
+    font-style: italic;
+    margin-bottom: 2rem;
+}
+h2 {
+    font-size: 16px;
+    font-weight: 400;
+}
+img.sw-logo {
+    height: 1.5em;
+    vertical-align: middle;
+    margin-right: 0.2em;
+}
+
+.planets-table {
+    display: block;
+    width: 280px;
+    @media screen and (min-width: 360px) { width: 350px; }
+    max-height: 500px;
+    @media screen and (min-height: 640px) { max-height: calc(100vh - 4vh - 130px); }
+    margin: 0 auto;
+    background-color: rgba($background, 0.3);
+    border: 1px outset mat-color($accent, darker);
+}

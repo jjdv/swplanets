@@ -2,12 +2,13 @@
 
 :host { display: block; }
 
-mini-map {
-    height: 100%;
-    font-size: 12px;
-    &.highlight, &:hover {
-        outline: 1px solid mat-color($accent);
-        transition: outline 0.3s linear;
+.container {
+    mini-map {
+        font-size: 12px;
+        &.highlight, &:hover {
+            outline: 1px solid mat-color($accent);
+            transition: outline 0.3s linear;
+        }
+        + mini-map {margin-left: 5px;}
     }
-    + mini-map {margin-left: 5px;}
 }

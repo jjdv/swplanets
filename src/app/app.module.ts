@@ -18,7 +18,7 @@ import { PlanetsTableComponent } from './components/planet-list/planets-table/pl
 import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { PlanetsDetailsTableComponent } from './components/planet-details/planets-details-table/planets-details-table.component';
 import { DetailedMapComponent } from './components/planet-list/detailed-map/detailed-map.component';
-import { ImageComponent } from './components/general/image/image.component';
+import { MiniMapComponent } from './components/general/mini-map/mini-map.component';
 import { SwGalaxyMapComponent } from './components/planet-list/sw-galaxy-map/sw-galaxy-map.component';
 
 @NgModule({
@@ -44,7 +44,7 @@ import { SwGalaxyMapComponent } from './components/planet-list/sw-galaxy-map/sw-
     PlanetsTableComponent,
     PlanetsDetailsTableComponent,
     DetailedMapComponent,
-    ImageComponent,
+    MiniMapComponent,
     SwGalaxyMapComponent
   ],
   providers: [],

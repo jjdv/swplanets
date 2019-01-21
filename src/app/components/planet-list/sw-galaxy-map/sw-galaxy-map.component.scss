@@ -20,7 +20,7 @@ $gridTransform: skew(-23.9deg) rotate(24.2deg) translate(-12.0%, -6.3%);
         left: 50%;
         margin-left: calc(-#{$mapResolutionX} / 2);
         margin-top: calc(-#{$mapResolutionY} / 2);
-        &.scale-transition { transition: transform 1s ease-in-out; }
+        transition: transform 0.5s linear;
         img {
             position: absolute;
             top: 0;

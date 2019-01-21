@@ -1,51 +1,33 @@
 @import '../../../styles/theme.scss';
 
-:host {
-    height: 100vh;
-    padding: 5vh 3vw;
-    @media screen and (min-width: 960px) {
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-    }
-}
-.container {
-    text-align: center;
-    planets-table {
-        width: 350px;
-        height: 100%;
-        margin: 0 auto;
-        border: 2px outset mat-color($accent, darker);
-    }
-    sw-galaxy-map { display: none; }
-}
+sw-galaxy-map { display: none; }
 detailed-map { display: none; }
 
 @media screen and (min-width: 960px) {
-    .container {
-        flex: 1 1 50vh;
-        position: relative;
-        planets-table, sw-galaxy-map {
-            position: absolute;
-            top: 0;
-            height: 100%;
+    .page {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        .container {
+            flex: 1 1 50vh;
+            position: relative;
+            planets-table, sw-galaxy-map {
+                position: absolute;
+                top: 0;
+                height: 100%;
+            }
+            planets-table { left: 0; }
+            sw-galaxy-map {
+                display: block;
+                left: 350px;
+                margin-left: 3vw;
+                width: calc(100vw - 350px - 2 * 3vw - 3vw);
+            }
         }
-        planets-table {
-            left: 0;
-            width: 350px;
-            height: 100%;
-            border: 2px outset mat-color($accent, darker);
-        }
-        sw-galaxy-map {
+        detailed-map {
             display: block;
-            left: 350px;
-            margin-left: 3vw;
-            width: calc(100vw - 350px - 2 * 3vw - 3vw);
+            flex: 0 0 auto;
+            margin-top: 3vh;
         }
-    }
-    detailed-map {
-        display: block;
-        flex: 0 0 auto;
-        margin-top: 3vh;
     }
 }

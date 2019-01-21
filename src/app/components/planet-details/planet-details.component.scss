@@ -1,15 +1,24 @@
-.component {
-    padding: 5vh 3vw;
-    h1.mat-display-2 { margin-top: 1rem; }
+.page {
+    position: relative;
+    button {
+        position: absolute;
+        margin-left: 3vw;
+        @media screen and (min-width: 360px) { margin-left: 0; }
+    }
+    h1 span.sw-logo {
+        text-align: center;
+        display: block;
+        @media screen and (min-width: 960px) { display: inline; }
+    }
     .container {
-        display: flex;
-        justify-content: space-around;
-        align-items: flex-start;
-        planet-details-table {
-            flex: 0 0 350px;
-        }
         .image { display: none; }
         @media screen and (min-width: 960px) {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            planet-details-table {
+                flex: 0 0 350px;
+            }
             .image {
                 display: block;
                 flex: 1 1 calc(100% - 350px - 3vw);

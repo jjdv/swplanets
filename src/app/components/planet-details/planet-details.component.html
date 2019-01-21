@@ -1,9 +1,12 @@
-<div class="component">
+<div class="page">
     <button mat-raised-button color="accent" (click)="back()">Back</button>
-    <h1 class="mat-display-2">Planet details</h1>
+    <h1>
+        <span class="sw-logo"><img src="../../../assets/StarWarsLogo.svg" class="sw-logo"/></span>
+        <span>Planet details</span>
+    </h1>
     
     <div class="container">
-        <planet-details-table [id]="id"></planet-details-table>
+        <planet-details-table [id]="id" class="planets-table"></planet-details-table>
         <div class="image">
                 <img src="../../../assets/Ryloth_Rebels.png"/>
         </div>
