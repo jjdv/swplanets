@@ -1,23 +1,23 @@
 @import './theme.scss';
 
-mat-form-field {
+.mat-form-field {
     display: block;
     margin: 0 1em 0;
     font-size: 12px;
     color: $foreground;
     &.mat-focused {
-        label { color: mat-color($accent, lighter); }
+        .mat-form-field-label { color: mat-color($accent, lighter); }
         .mat-form-field-ripple {
             height: 1px;
             background-color: mat-color($accent, lighter);
         }
     }
 }
-table.mat-table {
+.mat-table {
     background-color: unset;
     td.mat-cell { font-size: unset; }
 }
-mat-paginator.mat-paginator {
+.mat-paginator {
     background-color: unset;
     .mat-paginator-range-label { margin: 0 1em 0 0; }
     .mat-paginator-page-size-select {
