@@ -1,3 +1,4 @@
+@import './theme.scss';
 
 /* global reset */
 
@@ -49,7 +50,7 @@ img.sw-logo {
     margin-right: 0.2em;
 }
 
-.planets-table {
+.app-table {
     display: block;
     width: 280px;
     @media screen and (min-width: 360px) { width: 350px; }
@@ -58,4 +59,22 @@ img.sw-logo {
     margin: 0 auto;
     background-color: rgba($background, 0.3);
     border: 1px outset mat-color($accent, darker);
+    table {
+        width: calc(100% - 2em);
+        margin: 0 auto;
+        th:not(:first-child) .mat-sort-header-container { justify-content: center;}
+        tbody {
+            font-size: 13px;
+            & > tr {
+                height: 2em;
+                td:not(:first-child) { text-align: center;}
+                &:hover td {
+                    border-color: mat-color($accent, darker);
+                    transition: color 1s, border-color 1s;
+                }
+            }
+        }
+    }
 }
+
+.snack-bar.warning { color: mat-color($warn); }

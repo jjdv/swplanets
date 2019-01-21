@@ -1,54 +1,32 @@
 @import './theme.scss';
 
-.planets-table {
-    mat-form-field#filter {
-        display: block;
-        margin: 0 1em 0;
-        font-size: 12px;
-        color: $foreground;
-        &.mat-focused {
-            label { color: mat-color($accent, lighter); }
-            .mat-form-field-ripple {
-                height: 1px;
-                background-color: mat-color($accent, lighter);
-            }
-        }
-    }
-    .mat-table { background-color: unset; }
-    table {
-        width: calc(100% - 2em);
-        margin: 0 auto;
-        /*background-color: $background;*/
-        tbody > tr {
-            font-size: 13px;
-            height: 2em;
-            .mat-cell { font-size: unset; }
-            &:hover {
-                td {
-                    border-color: mat-color($accent, darker);
-                    transition: color 1s, border-color 1s;
-                }
-            }
-        }
-        td:not(:first-child) { text-align: center;}
-        th:not(:first-child) .mat-sort-header-container { justify-content: center;}
-        .mat-icon-button { width: unset; }
-        .mat-paginator-range-label { margin: 0 1em; }
-        .mat-paginator-page-size-select { width: 1.5em; }
-    }
-    mat-paginator {
-        background-color: unset;
-        .mat-paginator-page-size-select {
-            width: 3.5em;
-            &.mat-form-field.mat-focused.mat-primary .mat-select-arrow { color: mat-color($accent, darker); }
-            &.mat-form-field.mat-focused .mat-form-field-ripple { background-color: mat-color($accent, darker); }
-        }
-        .mat-paginator-range-label { margin: 0 1em 0 0; }
-        button {
-            width: unset;
-            .mat-paginator-icon { width: 1.5em; }
+mat-form-field {
+    display: block;
+    margin: 0 1em 0;
+    font-size: 12px;
+    color: $foreground;
+    &.mat-focused {
+        label { color: mat-color($accent, lighter); }
+        .mat-form-field-ripple {
+            height: 1px;
+            background-color: mat-color($accent, lighter);
         }
     }
 }
-
-.snack-bar.warning { color: mat-color($warn); }
+table.mat-table {
+    background-color: unset;
+    td.mat-cell { font-size: unset; }
+}
+mat-paginator.mat-paginator {
+    background-color: unset;
+    .mat-paginator-range-label { margin: 0 1em 0 0; }
+    .mat-paginator-page-size-select {
+        width: 3.5em;
+        &.mat-form-field.mat-focused.mat-primary .mat-select-arrow { color: mat-color($accent, darker); }
+        &.mat-form-field.mat-focused .mat-form-field-ripple { background-color: mat-color($accent, darker); }
+    }
+    button.mat-icon-button {
+        width: unset;
+        .mat-paginator-icon { width: 1.5em; }
+    }
+}
