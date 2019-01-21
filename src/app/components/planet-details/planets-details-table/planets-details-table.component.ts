@@ -10,19 +10,23 @@ import { PlanetListService } from 'src/app/services/planet-list/planet-list.serv
 })
 export class PlanetsDetailsTableComponent implements OnInit {
   @Input() id: number = 0;
+  planetName: string = '';
   dataSource: PlanetDetails = [];
   displayedColumns = ['propertyName', 'value'];
 
   constructor(private planetListService: PlanetListService) {}
 
   ngOnInit() {
-    this.getPlanetDetails()
+    this.getPlanetDetails();
   }
 
   private getPlanetDetails(): void {
     this.planetListService.details$.subscribe(pl => {
-      const planet = (Array.isArray(pl) && pl[this.id]) ? pl[this.id] : {}
-      this.dataSource = createPlanetDetails(planet)
+      const planet = (Array.isArray(pl) && pl[this.id]) ? pl[this.id] : null;
+      if (!planet) return;
+
+      this.dataSource = createPlanetDetails(planet);
+      this.planetName = planet.name;
     });
   }
 

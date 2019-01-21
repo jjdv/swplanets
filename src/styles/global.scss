@@ -23,7 +23,7 @@ body {
 }
 .page {
     height: 100vh;
-    min-height: calc(640px);
+    min-height: 600px;
     padding: 2vh 0;
     @media screen and (min-width: 360px) { padding: 2vh 3vw; }
 }
@@ -55,23 +55,22 @@ img.sw-logo {
     width: 280px;
     @media screen and (min-width: 360px) { width: 350px; }
     max-height: 500px;
-    @media screen and (min-height: 640px) { max-height: calc(100vh - 4vh - 130px); }
+    @media screen and (min-height: 600px) { max-height: calc(100vh - 4vh - 130px); }
     margin: 0 auto;
     background-color: rgba($background, 0.3);
     border: 1px outset mat-color($accent, darker);
+    h2 { margin: 1em 0 0; }
     table {
         width: calc(100% - 2em);
         margin: 0 auto;
+        font-size: 13px;
         th:not(:first-child) .mat-sort-header-container { justify-content: center;}
-        tbody {
-            font-size: 13px;
-            & > tr {
-                height: 2em;
-                td:not(:first-child) { text-align: center;}
-                &:hover td {
-                    border-color: mat-color($accent, darker);
-                    transition: color 1s, border-color 1s;
-                }
+        tbody  > tr {
+            height: 2em;
+            td:not(:first-child) { text-align: center;}
+            &:hover td {
+                border-color: mat-color($accent, darker);
+                transition: color 1s, border-color 1s;
             }
         }
     }

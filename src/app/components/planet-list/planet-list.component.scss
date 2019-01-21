@@ -13,10 +13,8 @@ detailed-map { display: none; }
             position: relative;
             planets-table, sw-galaxy-map {
                 position: absolute;
-                top: 0;
                 height: 100%;
             }
-            planets-table { left: 0; }
             sw-galaxy-map {
                 display: block;
                 left: 350px;

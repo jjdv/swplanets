@@ -1,25 +1,25 @@
-<div class="mat-elevation-z8">
-  <table mat-table class="full-width-table" [dataSource]="dataSource" aria-label="Planet details">
-    <!-- Property Name Column -->
-    <ng-container matColumnDef="propertyName">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let row">
-          <span>{{row.propertyName}}</span>
-          <span
-            *ngIf="row.propertyName == 'Population'"
-            matTooltip="The average population of sentient beings inhabiting this planet." matTooltipPosition="above" class="info"
-          >ⓘ</span>
-        </td>
-    </ng-container>
+<h2>{{planetName}}</h2>
 
-    <!-- Value Column -->
-    <ng-container matColumnDef="value">
-      <th mat-header-cell *matHeaderCellDef>Value</th>
-      <td mat-cell *matCellDef="let row">
-          <span class="value">{{row.value}}</span>
-        </td>
-    </ng-container>
+<table mat-table class="planet-details" [dataSource]="dataSource" aria-label="Planet details">
+  <!-- Property Name Column -->
+  <ng-container matColumnDef="propertyName">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let row">
+        <span>{{row.propertyName}}</span>
+        <span
+          *ngIf="row.propertyName == 'Population'"
+          matTooltip="The average population of sentient beings inhabiting this planet." matTooltipPosition="above" class="info"
+        >ⓘ</span>
+      </td>
+  </ng-container>
 
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-</div>
+  <!-- Value Column -->
+  <ng-container matColumnDef="value">
+    <th mat-header-cell *matHeaderCellDef>Value</th>
+    <td mat-cell *matCellDef="let row">
+        <span class="value">{{row.value}}</span>
+      </td>
+  </ng-container>
+
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

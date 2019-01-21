@@ -5,6 +5,7 @@
     margin: 0 1em 0;
     font-size: 12px;
     color: $foreground;
+    input { caret-color: inherit; }
     &.mat-focused {
         .mat-form-field-label { color: mat-color($accent, lighter); }
         .mat-form-field-ripple {
@@ -22,8 +23,15 @@
     .mat-paginator-range-label { margin: 0 1em 0 0; }
     .mat-paginator-page-size-select {
         width: 3.5em;
-        &.mat-form-field.mat-focused.mat-primary .mat-select-arrow { color: mat-color($accent, darker); }
-        &.mat-form-field.mat-focused .mat-form-field-ripple { background-color: mat-color($accent, darker); }
+        .mat-select-value {
+            text-align: center;
+            color: unset;
+        }
+        &.mat-form-field.mat-focused {
+            .mat-select-arrow { color: mat-color($accent, darker); }
+            .mat-form-field-ripple { background-color: mat-color($accent, darker); }
+            .mat-select-value { color: mat-color($accent, darker); }
+        }
     }
     button.mat-icon-button {
         width: unset;

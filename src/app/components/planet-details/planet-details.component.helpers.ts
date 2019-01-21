@@ -10,7 +10,7 @@ export type PlanetDetails = PlanetDetailsEl[];
 
 export function createPlanetDetails(planet: Planet | {}): PlanetDetails {
   if (!planet) return [];
-  const excluded = ['created', 'edited', 'url'];
+  const excluded = ['name', 'created', 'edited', 'url'];
   const planetDetails: PlanetDetails = [];
 
   for (let prop in planet) {
