@@ -1,0 +1,70 @@
+@import '../../../styles/theme.scss';
+
+:host {
+    background-image: linear-gradient(to bottom, #0000, #000);
+    perspective: 300px;
+}
+
+.component {
+    position: relative;
+    font-size: 11px;
+    color: #ddd;
+    padding: 0 3vw;
+    transform: rotate3d(1, 0, 0, 20deg);
+    overflow-y: auto;
+    height: 230px;
+    @media screen and (min-width: 740px) {
+        height: 120px;
+        font-size: 12px;
+    }
+    mat-icon {
+        position: absolute;
+        top: 0.5em;
+        right: 0.5em;
+        cursor: pointer;
+    }
+    div.container {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        padding: 5em 0;
+        @media screen and (min-width: 740px) { padding: 3em 0; }
+        & > div {
+            flex: 1 1 60vw;
+            min-width: 60vw;
+            margin: 0 2em 2em;
+            @media screen and (min-width: 740px) {
+                flex: 1 1 280px;
+                min-width: 280px;
+            }
+            h2 {
+                font-size: 15px;
+                text-align: left;
+                color: mat-color($accent, darker);
+                margin-bottom: 0.5em;
+            }
+            p + p { margin-top: 0.5em; }
+            a:link, a:visited { color: skyblue; }
+            .cc-icon {
+                border-width: 0;
+                margin-left: 0.5em;
+            }
+        }
+    }
+    &.clear-read {
+        height: unset;
+        padding: 0;
+        background-color: black;
+        transform: unset;
+        div.container {
+            padding: 0;
+            align-items: center;
+            & > div {
+                margin: 1em 2em;
+                @media screen and (min-width: 350px) { flex: 0 0 80vw; }
+                @media screen and (min-width: 600px) { flex: 0 0 50vw; }
+            }
+        }
+    }
+}
+

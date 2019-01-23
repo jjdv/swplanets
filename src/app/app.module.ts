@@ -20,6 +20,7 @@ import { PlanetsDetailsTableComponent } from './components/planet-details/planet
 import { DetailedMapComponent } from './components/planet-list/detailed-map/detailed-map.component';
 import { MiniMapComponent } from './components/general/mini-map/mini-map.component';
 import { SwGalaxyMapComponent } from './components/planet-list/sw-galaxy-map/sw-galaxy-map.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   imports: [
@@ -45,7 +46,11 @@ import { SwGalaxyMapComponent } from './components/planet-list/sw-galaxy-map/sw-
     PlanetsDetailsTableComponent,
     DetailedMapComponent,
     MiniMapComponent,
-    SwGalaxyMapComponent
+    SwGalaxyMapComponent,
+    FooterComponent,
+  ],
+  entryComponents: [
+    FooterComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -11,6 +11,7 @@ h2, mat-form-field, mat-paginator { flex: 0 0 auto; }
     flex: 0 1 auto;
     overflow-y: auto;
     cursor: default;
+    th { background-color: #181818; }
     tr.selected, tr:hover {
         cursor: copy;
         .hoverHighlight {
@@ -26,3 +27,4 @@ h2, mat-form-field, mat-paginator { flex: 0 0 auto; }
         margin-right: 3px;
     }
 }
+mat-paginator { background-color: #181818; }
