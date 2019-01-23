@@ -12,7 +12,6 @@
 
 html { font-size: 15px; }
 body {
-    height: 100vh;
     font-family: Roboto, "Helvetica Neue", sans-serif;
     background: {
         color: black;
@@ -53,7 +52,7 @@ img.sw-logo {
 .app-table {
     display: block;
     width: 280px;
-    @media screen and (min-width: 360px) { width: 350px; }
+    @media screen and (min-width: 380px) { width: 350px; }
     max-height: 500px;
     @media screen and (min-height: 600px) { max-height: calc(100vh - 4vh - 130px); }
     font-size: 13px;
