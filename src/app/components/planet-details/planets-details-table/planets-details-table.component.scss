@@ -4,8 +4,11 @@ h2 { margin-bottom: 1.5em; }
 
 table.planet-details {
   span.info {
-    font-size: 18px;
     margin-left: 5px;
+    mat-icon {
+      font-size: 18px;
+      vertical-align: middle;
+    }
   }
   td.mat-cell { padding: 0 1em; }
 }
