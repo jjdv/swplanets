@@ -3,6 +3,7 @@
 :host {
     background-image: linear-gradient(to bottom, #0000, #000);
     perspective: 300px;
+    overflow: hidden;
 }
 
 .component {
