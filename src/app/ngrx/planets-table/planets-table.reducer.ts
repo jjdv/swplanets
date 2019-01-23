@@ -6,8 +6,8 @@ export interface PlanetsTableState {
 }
 
 const planetsTableStateIni: PlanetsTableState = {
-  pageSize: 25,
-  pageNo: 2
+  pageSize: 10,
+  pageNo: 0
 }
 
 export function planetsTableReducer(state: PlanetsTableState = planetsTableStateIni, action: ActionsUnion): PlanetsTableState {
