@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './planet-details.component.html',
   styleUrls: ['./planet-details.component.scss']
 })
-export class PlanetDetailsComponent {
+export class PlanetDetailsComponent implements OnInit {
   id: number = 0;
   displayedColumns = ['name', 'knownPropsNo' , 'residentsNo', 'filmsNo'];
   

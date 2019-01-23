@@ -5,5 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './planet-list.component.html',
   styleUrls: ['./planet-list.component.scss']
 })
-export class PlanetListComponent {
-}
+export class PlanetListComponent {}
