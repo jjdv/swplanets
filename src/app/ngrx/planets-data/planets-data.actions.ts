@@ -40,4 +40,4 @@ export class ReportError implements Action {
   constructor(public payload: 'apiError' | 'networkError') {}
 }
 
-export type ActionsUnion = Initialize | SaveIniData | GetAll | SaveAllData | Reload;
+export type ActionsUnion = Initialize | SaveIniData | GetAll | SaveAllData | Reload | ReportError;

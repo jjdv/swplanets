@@ -1,10 +1,14 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
+import { MatPaginator, PageEvent, MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { Store, select } from '@ngrx/store';
+import { first } from 'rxjs/operators';
 
 import { PlanetListService, PlanetListEl } from 'src/app/services/planet-list/planet-list.service';
 import { MapName, DetailedMapService } from '../../../services/detailed-map/detailed-map.service'
 import { GalaxyMapService, Location } from '../../../services/galaxy-map/galaxy-map.service';
+import { PlanetsTableState } from '../../../ngrx/planets-table/planets-table.reducer';
+import { SavePageSize, SavePageNo } from 'src/app/ngrx/planets-table/planets-table.actions';
 
 @Component({
   selector: 'planets-table',
@@ -23,7 +27,8 @@ export class PlanetsTableComponent implements OnInit {
   
   constructor(
     private planetListService: PlanetListService, private router: Router, private snackBar: MatSnackBar,
-    private detailedMapService: DetailedMapService, private galaxyMapService: GalaxyMapService
+    private detailedMapService: DetailedMapService, private galaxyMapService: GalaxyMapService,
+    private store$: Store<{planetsTable: PlanetsTableState}>
   ) {}
 
   filterPlanet(planet: PlanetListEl, filterStr: string) {
@@ -40,6 +45,16 @@ export class PlanetsTableComponent implements OnInit {
     this.galaxyMapService.zoomedLocation$.subscribe(zoomedLocation => {
       this.zoomedLocation = !zoomedLocation || typeof zoomedLocation === 'string' ? <Location | null>zoomedLocation : zoomedLocation.id
     })
+
+    this.store$.pipe( select(state => state.planetsTable), first() ).subscribe(planetsTableState => {
+      this.paginator.pageSize = planetsTableState.pageSize;
+      this.paginator.pageIndex = planetsTableState.pageNo;
+    });
+  }
+
+  updatePageData(pageData: PageEvent) {
+    this.store$.dispatch(new SavePageSize(pageData.pageSize));
+    if (pageData.pageIndex != pageData.previousPageIndex) this.store$.dispatch(new SavePageNo(pageData.pageIndex));
   }
 
   applyFilter(filterValue: string) {

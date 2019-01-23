@@ -4,7 +4,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
-import { ActionTypes, SaveIniData, SaveAllData, ReportError } from './planets.actions'
+import { ActionTypes, SaveIniData, SaveAllData, ReportError } from './planets-data.actions'
 import { GetPlanetsService } from '../../services/get-planets/get-planets.service';
 
  

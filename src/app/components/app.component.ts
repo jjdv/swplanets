@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Initialize, GetAll } from '../ngrx/planets/planets.actions'
+import { Initialize, GetAll } from '../ngrx/planets-data/planets-data.actions'
 import { Store, select } from '@ngrx/store';
 
 import { PlanetsData } from '../services/get-planets/get-planets.config';

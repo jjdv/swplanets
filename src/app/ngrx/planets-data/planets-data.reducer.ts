@@ -1,5 +1,5 @@
 import { PlanetsData, PlanetsIniData } from '../../services/get-planets/get-planets.config'
-import { ActionTypes, ActionsUnion } from './planets.actions'
+import { ActionTypes, ActionsUnion } from './planets-data.actions'
 
 function stateUpdatedWithPayload(state, payload) {
   if (typeof payload === 'string') return {...state, state: payload}; // i.e. error occured and error Message is in payload
@@ -10,7 +10,7 @@ function stateUpdatedWithPayload(state, payload) {
   else  return {...state, state: 'apiError'};
 }
 
-export function planetsReducer(state: PlanetsData = PlanetsIniData, action: ActionsUnion): PlanetsData {
+export function planetsDataReducer(state: PlanetsData = PlanetsIniData, action: ActionsUnion): PlanetsData {
   switch (action.type) {
 
     case ActionTypes.Initialize: return {...PlanetsIniData, state: 'iniDataRequested'}; // will be completed by ngrx Effect
@@ -22,6 +22,8 @@ export function planetsReducer(state: PlanetsData = PlanetsIniData, action: Acti
     case ActionTypes.SaveAllData: return stateUpdatedWithPayload(state, action.payload);
 
     case ActionTypes.Reload: return {...PlanetsIniData, state: 'iniDataRequested'}; // will be completed by ngrx Effect
+
+    case ActionTypes.ReportError: return {...state, state: action.payload};
 
     default: return state;
   }

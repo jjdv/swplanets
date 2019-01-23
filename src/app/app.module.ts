@@ -6,8 +6,9 @@ import { EffectsModule } from '@ngrx/effects';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MaterialModule } from './modules/material-module';
 
-import { planetsReducer } from './ngrx/planets/planets.reducer';
-import { PlanetsEffects } from './ngrx/planets/planets.effects';
+import { planetsDataReducer } from './ngrx/planets-data/planets-data.reducer';
+import { PlanetsEffects } from './ngrx/planets-data/planets-data.effects';
+import { planetsTableReducer } from './ngrx/planets-table/planets-table.reducer';
 import { RoutingModule } from './modules/routing.module';
 import { AppComponent } from './components/app.component';
 import { PlanetListComponent } from './components/planet-list/planet-list.component';
@@ -25,7 +26,7 @@ import { FooterComponent } from './components/footer/footer.component';
 @NgModule({
   imports: [
     BrowserModule,
-    StoreModule.forRoot({ planetsData: planetsReducer }),
+    StoreModule.forRoot({ planetsData: planetsDataReducer, planetsTable: planetsTableReducer }),
     EffectsModule.forRoot([PlanetsEffects]),
     RoutingModule,
     HttpClientModule,
