@@ -88,7 +88,6 @@ export class SwGalaxyMapComponent implements OnInit, AfterViewInit {
     const tdCenterX = tdRect.left - containerRect.left + tdRect.width/2;
     const tdCenterY = tdRect.top - containerRect.top + tdRect.height/2;
     this.zoomOn = true;
-    this.container.nativeElement.classList.add('zoom');
     this.setMapSize(tdCenterX, tdCenterY);
   }
 
@@ -103,7 +102,6 @@ export class SwGalaxyMapComponent implements OnInit, AfterViewInit {
     if (!this.zoomOn) return;
     this.zoomedLocation = null;
     this.zoomOn = false;
-    this.container.nativeElement.classList.remove('zoom');
     this.setMapSize();
   }
 

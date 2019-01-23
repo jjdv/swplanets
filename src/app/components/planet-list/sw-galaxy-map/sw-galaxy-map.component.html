@@ -1,4 +1,4 @@
-<div #container class="container" (click)="zoomOffEvent()">
+<div #container class="container" [class.zoom]="zoomOn" (click)="zoomOffEvent()">
   <div [ngStyle]="mapZoom" class="sw-galaxy-map" [class.scale-transition]="scaleTransitionOn">
     <img src='../../../../../assets/swgalaxymaphd.jpg'/>
     <table class="map-grid">

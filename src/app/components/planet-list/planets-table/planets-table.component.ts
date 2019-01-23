@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent, MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
@@ -10,6 +10,15 @@ import { GalaxyMapService, Location } from '../../../services/galaxy-map/galaxy-
 import { PlanetsTableState } from '../../../ngrx/planets-table/planets-table.reducer';
 import { SavePageSize, SavePageNo } from 'src/app/ngrx/planets-table/planets-table.actions';
 
+interface TrSelect {
+  freeze: string;
+  hover: string;
+}
+
+function filterPlanet(planet: PlanetListEl, filterStr: string) {
+  return planet.name.toLowerCase().includes(filterStr.toLowerCase())
+}
+
 @Component({
   selector: 'planets-table',
   templateUrl: './planets-table.component.html',
@@ -18,9 +27,11 @@ import { SavePageSize, SavePageNo } from 'src/app/ngrx/planets-table/planets-tab
 export class PlanetsTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild('planetListTable') planetListTable: ElementRef;
   dataSource: MatTableDataSource<PlanetListEl>;
-  freeze: boolean = false;
+  trSelect: TrSelect = {
+    freeze: null,
+    hover: null
+  };
   zoomedLocation: Location | null = null;
 
   displayedColumns = ['name', 'location', 'detailedMap', 'details'];
@@ -31,17 +42,13 @@ export class PlanetsTableComponent implements OnInit {
     private store$: Store<{planetsTable: PlanetsTableState}>
   ) {}
 
-  filterPlanet(planet: PlanetListEl, filterStr: string) {
-    return planet.name.toLowerCase().includes(filterStr.toLowerCase())
-  }
-
   ngOnInit() {
     this.dataSource = new MatTableDataSource();
     this.planetListService.list$.subscribe(list => {this.dataSource.data = list});
     this.sort.sortChange.subscribe(() => this.paginator.firstPage());
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.dataSource.filterPredicate = this.filterPlanet;
+    this.dataSource.filterPredicate = filterPlanet;
     this.galaxyMapService.zoomedLocation$.subscribe(zoomedLocation => {
       this.zoomedLocation = !zoomedLocation || typeof zoomedLocation === 'string' ? <Location | null>zoomedLocation : zoomedLocation.id
     })
@@ -50,6 +57,11 @@ export class PlanetsTableComponent implements OnInit {
       this.paginator.pageSize = planetsTableState.pageSize;
       this.paginator.pageIndex = planetsTableState.pageNo;
     });
+  }
+
+  selected(row: PlanetListEl): boolean {
+    const rowId = row.name + row.location;
+    return rowId == this.trSelect.freeze || rowId == this.trSelect.hover;
   }
 
   updatePageData(pageData: PageEvent) {
@@ -62,41 +74,36 @@ export class PlanetsTableComponent implements OnInit {
     this.dataSource.paginator.firstPage();
   }
 
-  selectMaps(location: string | null = null, detailedMap: string | null = null) {
+  selectMaps(row: PlanetListEl | null = null) {
+    const location = row ? row.location : null;
+    const detailedMap = row ? row.detailedMap : null;
     this.galaxyMapService.selectLocation(location);
     this.detailedMapService.selectMap(detailedMap);
   }
 
-  highlightFreeze(event: Event, row: PlanetListEl) {
-    const tr = <Element>event.currentTarget;
-    if (this.freeze) {
-      if (tr.classList.contains('selected')) {
-        tr.classList.remove('selected');
-        this.freeze = false;
-        return;
-      }
-      tr.parentElement.getElementsByClassName('selected')[0].classList.remove('selected');
+  highlightFreeze(row: PlanetListEl) {
+    const rowId = row.name + row.location;
+    if (rowId == this.trSelect.freeze) this.trSelect.freeze = null;
+    else {
+      this.trSelect.freeze = rowId;
+      this.trSelect.hover = null;
     }
-    tr.classList.add('selected');
-    this.selectMaps(row.location, row.detailedMap);
-    this.freeze = true;
+    this.selectMaps(row);
   }
 
-  selectOn(event: Event, row: PlanetListEl) {
-    if (this.freeze) return;
-    const tr = <Element>event.currentTarget;
-    tr.classList.add('selected');
-    this.selectMaps(row.location, row.detailedMap);
+  selectOn(row: PlanetListEl) {
+    if (this.trSelect.freeze) return;
+    this.trSelect.hover = row.name + row.location;
+    this.selectMaps(row);
   }
 
-  selectOff(event: Event) {
-    if (this.freeze) return;
-    const tr = <Element>event.currentTarget;
-    tr.classList.remove('selected');
-    this.selectMaps(null);
+  selectOff() {
+    if (this.trSelect.freeze) return;
+    this.trSelect.hover = null;
+    this.selectMaps();
   }
 
-  displayDetails(id: number) {
+  displayDetails(id: number): void {
     if (Number.isInteger(id)) this.router.navigate([`/planet/${id}`]);
     else this.snackBar.open('No details available for this planet.', 'close', {
       duration: 3000,
@@ -105,9 +112,13 @@ export class PlanetsTableComponent implements OnInit {
     });
   }
   
-  displayDetailedMap(mapName: MapName): void { this.detailedMapService.openFullScreen(mapName); }
+  displayDetailedMap(event: Event, mapName: MapName): void {
+    event.stopPropagation();
+    this.detailedMapService.openFullScreen(mapName);
+  }
   
-  toggleLocationZoom(location: Location): void {
+  toggleLocationZoom(event: Event, location: Location): void {
+    event.stopPropagation();
     if (this.zoomedLocation && this.zoomedLocation != location) {
       setTimeout(() => this.galaxyMapService.toggleLocationZoom(location), 1400);
     }
