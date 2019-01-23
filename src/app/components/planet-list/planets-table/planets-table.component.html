@@ -41,7 +41,7 @@
         matTooltip="Numbe of properties available. Click item to go to detals." matTooltipPosition="above"
       >Details</th>
       <td mat-cell *matCellDef="let row">
-          <span (click)="displayDetails(row.id)" [class]="row.details != '-' ? 'hoverHighlight details' : null">
+          <span (click)="displayDetails(row.id)" [class]="row.details != 0 ? 'hoverHighlight details' : null">
             <span *ngIf="row.details > 0" class="icon">🗏</span>
             <span>{{row.details > 0 ? row.details : '-'}}</span>
           </span>

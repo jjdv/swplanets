@@ -13,13 +13,19 @@ h2, mat-form-field, mat-paginator { flex: 0 0 auto; }
     cursor: default;
     th { background-color: #181818; }
     tr.selected, tr:hover {
-        cursor: copy;
-        .hoverHighlight {
+        .hoverHighlight.details {
             color: mat-color($accent);
-            transition: color 0.3 linear;
-            &.zoom { cursor: zoom-in; }
-            &.zoom.zoomed { cursor: zoom-out; }
-            &.details { cursor: pointer; }
+            cursor: pointer;
+        }
+        @media screen and (min-width: 960px) {
+            cursor: copy;
+            .hoverHighlight {
+                color: mat-color($accent);
+                transition: color 0.3 linear;
+                &.zoom { cursor: zoom-in; }
+                &.zoom.zoomed { cursor: zoom-out; }
+                .details { cursor: pointer; }
+            }
         }
     }
     span.icon {
