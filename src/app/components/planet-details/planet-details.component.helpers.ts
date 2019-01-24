@@ -29,13 +29,13 @@ function propToName(prop: string): string {
 
 function propValToValue(prop, val) {
   switch (prop) {
-    case 'surface_water': return Number(val) !== NaN ? val + '%' : 'unknown';
+    case 'surface_water': return Number.isNaN(Number(val)) ? 'unknown' : val + '%';
     case 'residents': return Array.isArray(val) ? val.length : 'unknown';
     case 'films': return Array.isArray(val) ? val.length : 'unknown';
-    case 'rotation_period': return Number(val) !== NaN ? val + 'h' : 'unknown';;
-    case 'orbital_period': return Number(val) !== NaN ? val + ' days' : 'unknown';;
-    case 'diameter': return Number(val) !== NaN ? val + ' km' : 'unknown';;
-    case 'gravity': return Number(val.slice(0, -9)) !== NaN ? val.slice(0, -9) + ' x gravity of the Earth' : val;
+    case 'rotation_period': return Number.isNaN(Number(val)) ? 'unknown' : val + 'h';
+    case 'orbital_period': return Number.isNaN(Number(val)) ? 'unknown' : val + ' days';
+    case 'diameter': return Number.isNaN(Number(val)) ? 'unknown' : val + ' km';
+    case 'gravity': return val.slice(0, -9) == '' || Number.isNaN(Number(val.slice(0, -9))) ? val : val.slice(0, -9) + ' x gravity of the Earth';
     case 'population': return Number.isInteger(val) ? Number(val).toLocaleString() : 'unknown';
     default: return val
   }
