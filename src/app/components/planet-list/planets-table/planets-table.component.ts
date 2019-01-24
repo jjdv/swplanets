@@ -1,14 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, PageEvent, MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { first } from 'rxjs/operators';
+import {FormControl} from '@angular/forms';
+import { MatPaginator, PageEvent, MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
+import { take } from 'rxjs/operators';
 
 import { PlanetListService, PlanetListEl } from 'src/app/services/planet-list/planet-list.service';
 import { MapName, DetailedMapService } from '../../../services/detailed-map/detailed-map.service'
 import { GalaxyMapService, Location } from '../../../services/galaxy-map/galaxy-map.service';
 import { PlanetsTableState } from '../../../ngrx/planets-table/planets-table.reducer';
-import { SavePageSize, SavePageNo } from 'src/app/ngrx/planets-table/planets-table.actions';
+import { SavePageSize, SavePageNo, SaveFilter } from 'src/app/ngrx/planets-table/planets-table.actions';
 
 interface TrSelect {
   freeze: string;
@@ -28,6 +29,7 @@ export class PlanetsTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<PlanetListEl>;
+  filter: FormControl = new FormControl('');
   trSelect: TrSelect = {
     freeze: null,
     hover: null
@@ -53,9 +55,11 @@ export class PlanetsTableComponent implements OnInit {
       this.zoomedLocation = !zoomedLocation || typeof zoomedLocation === 'string' ? <Location | null>zoomedLocation : zoomedLocation.id
     })
 
-    this.store$.pipe( select(state => state.planetsTable), first() ).subscribe(planetsTableState => {
+    this.store$.pipe( select(state => state.planetsTable), take(1) ).subscribe(planetsTableState => {
       this.paginator.pageSize = planetsTableState.pageSize;
       this.paginator.pageIndex = planetsTableState.pageNo;
+      this.filter.setValue(planetsTableState.filter);
+      this.dataSource.filter = this.filter.value;
     });
   }
 
@@ -69,9 +73,10 @@ export class PlanetsTableComponent implements OnInit {
     if (pageData.pageIndex != pageData.previousPageIndex) this.store$.dispatch(new SavePageNo(pageData.pageIndex));
   }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue;
+  applyFilter() {
+    this.dataSource.filter = this.filter.value;
     this.dataSource.paginator.firstPage();
+    this.store$.dispatch(new SaveFilter(this.filter.value));
   }
 
   selectMaps(row: PlanetListEl | null = null) {

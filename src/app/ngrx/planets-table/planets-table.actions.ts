@@ -2,7 +2,8 @@ import { Action } from '@ngrx/store';
 
 export enum ActionTypes {
   SavePageSize = '[PlanetsTable Component] SavePageSize',
-  SavePageNo = '[PlanetsTable Component] SavePageNo'
+  SavePageNo = '[PlanetsTable Component] SavePageNo',
+  SaveFilter = '[PlanetsTable Component] SaveFilter'
 }
 
 export class SavePageSize implements Action {
@@ -17,4 +18,10 @@ export class SavePageNo implements Action {
   constructor(public payload: number) {}
 }
 
-export type ActionsUnion = SavePageSize | SavePageNo;
+export class SaveFilter implements Action {
+  readonly type = ActionTypes.SaveFilter;
+
+  constructor(public payload: string) {}
+}
+
+export type ActionsUnion = SavePageSize | SavePageNo | SaveFilter;

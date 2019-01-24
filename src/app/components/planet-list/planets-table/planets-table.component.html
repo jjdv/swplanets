@@ -1,7 +1,7 @@
 <h2>Planet list</h2>
 
 <mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" errorState="false">
+  <input matInput [formControl]="filter" (keyup)="applyFilter()" placeholder="Filter" errorState="false">
 </mat-form-field>
 
 <div class="planet-list-table">
