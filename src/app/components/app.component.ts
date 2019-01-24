@@ -15,13 +15,17 @@ export class AppComponent implements OnInit {
   constructor(private store$: Store<{planetsData: PlanetsData}>) {}
 
   ngOnInit() {
+
+    // initialization of data pull from SWAPI
+    // at the current app architecture it would make sense to include some basic planet data in the app
+    // but it's left this way to show cooperation with the SWAPI
     this.store$.dispatch(new Initialize());
 
     // Preloading data of the rest of the planets (low data volume and high chances it will be used).
     // Actualy should be done before displaying the planet list to display the first page according to some sorting criterion
     // but I wanted to show some code/data split approach with dynamic loading technique
-    /*this.store$.pipe( select(state => state.planetsData.state) ).subscribe(planetsDataState => {
+    this.store$.pipe( select(state => state.planetsData.state) ).subscribe(planetsDataState => {
       if (planetsDataState == 'iniData') this.store$.dispatch(new GetAll());
-    });*/
+    });
   }
 }
