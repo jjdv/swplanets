@@ -5,7 +5,7 @@ This project was started as an opportunity to take a deeper dive into Angular ec
 
 ## Interactive Star Wars Galaxy Map
 I was very glad when I saw on the web page the whole interactivity I had in mind. You can see the final result at <https://swplanets.appspot.com>.  
-Here is the full list of interactive features:
+Here is the full list of the interactive features:
 - basic filtering and sorting based on different criteria
 - you can see the respective sector on the Galaxy Map where the hovered planet is located
 - if the planet is presented on a Detailed Map, this map is highlighted too
