@@ -4,7 +4,33 @@ You can see the final result at <https://swplanets.appspot.com>.
 ## Overview
 This project was started as an opportunity to take a deeper dive into Angular ecosystem, starting from TypeScript, through Angular Router, NgRX store, RxJS flow up to Angular Material. The intended basic functionality of the project was presentation of a list of Star Wars planets and their details based on the [SWAPI](https://swapi.co/) - The Star Wars API, created by Paul Hallett. However, when investigating available resources helpful for the graphical side of the project, I found the [Star Wars Galaxy Map](https://wrvh.home.xs4all.nl/galaxymap/index.html) which provides great visualization of Star Wars planets in the whole galaxy. From this point, I coudn't resist not to make this great work interactive.
 
-## Interactive Star Wars Galaxy Map
+
+## Project setup
+
+### Installation
+Assuming you have [Node.js](https://nodejs.org/en/) installed, which includes npm, please copy this repository to a local project folder. Start a terminal, change the working directory to the project folder and run:
+```
+npm install
+```
+Stay in the project working directory for all the following commands.
+
+### Compiles and hot-reloads for development
+In order to run a developement version of the project run:
+```
+ng serve
+```
+After starting the development server you can play with the app in your browser under: <http://localhost:4200>.
+
+### Compiles and minifies for production
+To create the production version hit:
+```
+ng build
+```
+The same production version is available at <https://swplanets.appspot.com>.
+
+## App features
+
+### Interactive Star Wars Galaxy Map
 I was very glad when I saw on the web page the whole interactivity I had in mind. Here is the full list of the interactive features:
 - basic filtering and sorting based on different criteria
 - you can see the respective sector on the Galaxy Map where the hovered planet is located
@@ -16,7 +42,7 @@ I was very glad when I saw on the web page the whole interactivity I had in mind
 
 As a cherry on top, you may play a bit with the Star Wars style of text movement in the footer. Still you can make it stright, for better readability, with a click on the icon in the top right corner of the footer.
 
-## Responsive design
+### Responsive design
 Nowadays, a responsive design is a must, so the page elements fits optimally to the screen size automatically. For small screens the application limits displayed information and functionality as appropriate (fortunatelly the footer behaviour is kept ;)). In addition, a user is informed about more functions available on larger screens,
 
 ## Disclaimer
