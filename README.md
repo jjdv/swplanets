@@ -1,27 +1,28 @@
-# Swplanets
+# Star Wars Planets
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.4.
+## Overview
+This project was started as an opportunity to take a deeper dive into Angular ecosystem, starting from TypeScript, through Angular Router, NgRX store, RxJS flow up to Angular Material. The intended basic functionality of the project was presentation of a list of Star Wars planets and their details based on the [SWAPI](https://swapi.co/) - The Star Wars API, created by Paul Hallett. However, when investigating available resources helpful for the graphic side of the project, I found the [Star Wars Galaxy Map](https://wrvh.home.xs4all.nl/galaxymap/index.html) which provides great visualization of Star Wars planets in the whole galaxy. From this point, I coudn't resist not to make this great work interactive.
 
-## Development server
+## Interactive Star Wars Galaxy Map
+I was very glad when I saw on the web page the whole interactivity I had in mind. Here is the full list of interactive features:
+- basic filtering and sorting based on different criteria
+- you can see the respective sector on the Galaxy Map where the hovered planet is located
+- if the planet is presented on a Detailed Map, this map is highlighted too
+- you can freeze the highlights by clicking on a selected planet
+- any sector of the Galaxy Map and any Detailed Map can be zoomed with a click
+- you can also zoom-in and -out those maps for a selected planet directly from that planet specification by clicking on the related field
+- finally, you can click on the details field of a planet to go to a page presenting details of that planets.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+As a cherry on top, you may play a bit with the Star Wars style of text movement in the footer. Still you can make it stright, for better readability, with a click on the icon in the top right corner of the footer.
 
-## Code scaffolding
+## Responsive design
+Nowadays, a responsive design is a must, so the page elements fits optimally to the screen size automatically. For small screens the application limits displayed information and functionality as appropriate (fortunatelly the footer behaviour is kept ;)). In addition, a user is informed about more functions available on larger screens,
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Disclaimer
+This site was created only to play with selected web development technologies. All materials, trademarks, logos, design rights or similar rights, that are used on this site, are the property of their respective owners, in particular Lucasfilm Ltd. LLC.
 
-## Build
+The use of any trademark on this site does not vest in the author of this site any trademark ownership rights in such trademarks, nor does the use of such trademarks imply any affiliation with or endorsement of the site and its authors by such owners.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Licence
+[![CC-BY-SA](https://i.creativecommons.org/l/by-sa/4.0/80x15.png)](http://creativecommons.org/licenses/by-sa/4.0/)
+This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/). It may be copied, distributed and changed freely as long as the original author is credited and the result can also be copied, distributed and changed with no restrictions.
