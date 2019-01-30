@@ -1,11 +1,11 @@
 # Star Wars Planets
+You can see the final result at <https://swplanets.appspot.com>.
 
 ## Overview
 This project was started as an opportunity to take a deeper dive into Angular ecosystem, starting from TypeScript, through Angular Router, NgRX store, RxJS flow up to Angular Material. The intended basic functionality of the project was presentation of a list of Star Wars planets and their details based on the [SWAPI](https://swapi.co/) - The Star Wars API, created by Paul Hallett. However, when investigating available resources helpful for the graphical side of the project, I found the [Star Wars Galaxy Map](https://wrvh.home.xs4all.nl/galaxymap/index.html) which provides great visualization of Star Wars planets in the whole galaxy. From this point, I coudn't resist not to make this great work interactive.
 
 ## Interactive Star Wars Galaxy Map
-I was very glad when I saw on the web page the whole interactivity I had in mind. You can see the final result at <https://swplanets.appspot.com>.  
-Here is the full list of the interactive features:
+I was very glad when I saw on the web page the whole interactivity I had in mind. Here is the full list of the interactive features:
 - basic filtering and sorting based on different criteria
 - you can see the respective sector on the Galaxy Map where the hovered planet is located
 - if the planet is presented on a Detailed Map, this map is highlighted too
